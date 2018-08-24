@@ -13,6 +13,8 @@
 		7461893B212C01FB00838040 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7461893A212C01FB00838040 /* Assets.xcassets */; };
 		7461893E212C01FB00838040 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7461893C212C01FB00838040 /* LaunchScreen.storyboard */; };
 		74618957212EA13300838040 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74618956212EA13300838040 /* PlayViewController.swift */; };
+		74618959212ED38200838040 /* QHPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74618958212ED38200838040 /* QHPlayerView.swift */; };
+		7461895B212FA67A00838040 /* QHPlayerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7461895A212FA67A00838040 /* QHPlayerControlView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		7461893D212C01FB00838040 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7461893F212C01FB00838040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		74618956212EA13300838040 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
+		74618958212ED38200838040 /* QHPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QHPlayerView.swift; sourceTree = "<group>"; };
+		7461895A212FA67A00838040 /* QHPlayerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QHPlayerControlView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +75,8 @@
 		74618945212C025500838040 /* QHPlayerMan */ = {
 			isa = PBXGroup;
 			children = (
+				74618958212ED38200838040 /* QHPlayerView.swift */,
+				7461895A212FA67A00838040 /* QHPlayerControlView.swift */,
 			);
 			path = QHPlayerMan;
 			sourceTree = "<group>";
@@ -148,7 +154,9 @@
 			files = (
 				74618936212C01FA00838040 /* ViewController.swift in Sources */,
 				74618957212EA13300838040 /* PlayViewController.swift in Sources */,
+				74618959212ED38200838040 /* QHPlayerView.swift in Sources */,
 				74618934212C01FA00838040 /* AppDelegate.swift in Sources */,
+				7461895B212FA67A00838040 /* QHPlayerControlView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
