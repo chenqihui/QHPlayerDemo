@@ -38,7 +38,7 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
         if let url = URL(string: "http://10.7.66.56/resource/4AC51038CA4411EED492019D6EA79A50.mp4") {
             let playV = QHPlayerView.createAt(superView: contentView)
             playV.prepare(url: url)
-            let _ = playV.play()
+//            let _ = playV.play()
         }
     }
     

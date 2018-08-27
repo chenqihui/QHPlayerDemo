@@ -15,6 +15,7 @@
 		74618957212EA13300838040 /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74618956212EA13300838040 /* PlayViewController.swift */; };
 		74618959212ED38200838040 /* QHPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74618958212ED38200838040 /* QHPlayerView.swift */; };
 		7461895B212FA67A00838040 /* QHPlayerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7461895A212FA67A00838040 /* QHPlayerControlView.swift */; };
+		7461895D2130122F00838040 /* QHPlayerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7461895C2130122F00838040 /* QHPlayerConfig.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		74618956212EA13300838040 /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		74618958212ED38200838040 /* QHPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QHPlayerView.swift; sourceTree = "<group>"; };
 		7461895A212FA67A00838040 /* QHPlayerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QHPlayerControlView.swift; sourceTree = "<group>"; };
+		7461895C2130122F00838040 /* QHPlayerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QHPlayerConfig.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 			children = (
 				74618958212ED38200838040 /* QHPlayerView.swift */,
 				7461895A212FA67A00838040 /* QHPlayerControlView.swift */,
+				7461895C2130122F00838040 /* QHPlayerConfig.swift */,
 			);
 			path = QHPlayerMan;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				74618959212ED38200838040 /* QHPlayerView.swift in Sources */,
 				74618934212C01FA00838040 /* AppDelegate.swift in Sources */,
 				7461895B212FA67A00838040 /* QHPlayerControlView.swift in Sources */,
+				7461895D2130122F00838040 /* QHPlayerConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
