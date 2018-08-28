@@ -27,8 +27,9 @@ class QHPlayerView: UIView {
         print("[\(type(of: self)) \(#function)]")
         #endif
         
-        p_removeVideoTimerObserver()
         p_removeVideoKVO()
+        p_removeVideoTimerObserver()
+        p_removeVideoNotificaion()
     }
     
     init(frame: CGRect, initConfig config: QHPlayerPlayConfig) {
@@ -46,8 +47,44 @@ class QHPlayerView: UIView {
     private func p_setup() {
         p_addPlayControlView()
     }
+}
+
+extension QHPlayerView {
     
-    private func p_seek(to seconds: Float64, completionHandler: @escaping (Bool) -> Swift.Void) {
+    func p_prepare(url URL: URL) {
+        if let playerLayer = layer as? AVPlayerLayer {
+            let playerItem = AVPlayerItem(url: URL)
+            if playerLayer.player != nil {
+                playerLayer.player?.pause()
+                playerLayer.player = nil
+            }
+            let player = AVPlayer(playerItem: playerItem)
+            player.automaticallyWaitsToMinimizeStalling = false
+            playerLayer.player = player
+            
+            playerLayer.videoGravity = playConfig.videoGravity
+            
+            p_addVideoKVO()
+            p_addVideoTimerObserver()
+            p_addVideoNotificaion()
+            
+            playControlV?.playSumTime = Float(p_currentItemDuration())
+        }
+    }
+    
+    func p_play() {
+        if let player = p_player() {
+            player.play()
+        }
+    }
+    
+    func p_pause() {
+        if let player = p_player() {
+            player.pause()
+        }
+    }
+    
+    func p_seek(to seconds: Float64, completionHandler: @escaping (Bool) -> Swift.Void) {
         if let player = p_player() {
             guard player.currentItem?.status == .readyToPlay else {
                 completionHandler(false)
@@ -62,61 +99,8 @@ class QHPlayerView: UIView {
             completionHandler(false)
         }
     }
-
-}
-
-// MARK - Public
-
-extension QHPlayerView {
     
-    class func createAt(superView: UIView, initConfig config: QHPlayerPlayConfig = QHPlayerPlayConfig()) -> QHPlayerView {
-        let playV = QHPlayerView(frame: CGRect.zero, initConfig: config)
-        superView.addSubview(playV)
-        playV.translatesAutoresizingMaskIntoConstraints = false
-        let viewsDict = ["playV": playV]
-        superView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[playV]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
-        superView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[playV]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
-        return playV
-    }
-    
-    func prepare(url URL: URL) {
-        if let playerLayer = layer as? AVPlayerLayer {
-            let playerItem = AVPlayerItem(url: URL)
-            if playerLayer.player != nil {
-                playerLayer.player?.pause()
-                playerLayer.player = nil
-            }
-            let player = AVPlayer(playerItem: playerItem)
-            playerLayer.player = player
-            
-            playerLayer.videoGravity = playConfig.videoGravity
-            
-            p_addVideoKVO()
-            p_addVideoTimerObserver()
-            
-            playControlV?.playSumTime = Float(p_currentItemDuration())
-        }
-    }
-    
-    func play() {
-        if let player = p_player() {
-            player.play()
-        }
-    }
-    
-    func pause() {
-        if let player = p_player() {
-            player.pause()
-        }
-    }
-    
-    func seek(to seconds: Float64, completionHandler: @escaping (Bool) -> Swift.Void) {
-        p_seek(to: seconds) { (bFinished) in
-            completionHandler(bFinished)
-        }
-    }
-    
-    func mute(is bMute: Bool) {
+    func p_mute(is bMute: Bool) {
         if let player = p_player() {
             player.isMuted = bMute
         }

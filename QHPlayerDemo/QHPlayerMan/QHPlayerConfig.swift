@@ -38,4 +38,9 @@ class QHPlayerDefinition: NSObject {
 
 extension NSNotification.Name {
     public static let QHPlayerProgress: NSNotification.Name = NSNotification.Name(rawValue: "QHPlayerProgress")
+    
+    public static let QHPlayerItemStatus: NSNotification.Name = NSNotification.Name(rawValue: "QHPlayerItemStatus")
+    
+    public static let QHPlayerItemBuffer: NSNotification.Name = NSNotification.Name(rawValue: "QHPlayerItemBuffer")
+    
 }
