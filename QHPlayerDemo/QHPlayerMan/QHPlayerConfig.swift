@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AVFoundation
 
 enum QHPlayerStatus {
     case unknown
@@ -17,21 +18,24 @@ enum QHPlayerStatus {
     case fail
 }
 
-struct QHPlayerConfig {
+struct QHPlayerPlayConfig {
+    var control = false
+    // 日志
+    var log = false
     // 准备好自动播放
     var autoPlay = false
     // 循环播放
     // 静音
     // 缓存
-    var addPlayControl = false
+    // 填充模式
+    var videoGravity: AVLayerVideoGravity = .resizeAspect
+    // 播放进度回调间隔
+    var progress: Float64 = 0
 }
-
-// 播放进度回调间隔
-// 日志
 
 class QHPlayerDefinition: NSObject {
 }
 
-extension QHPlayerDefinition {
-    static let pp = "npp"
+extension NSNotification.Name {
+    public static let QHPlayerProgress: NSNotification.Name = NSNotification.Name(rawValue: "QHPlayerProgress")
 }

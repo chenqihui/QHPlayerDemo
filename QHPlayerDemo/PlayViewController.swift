@@ -24,7 +24,7 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
         // Do any additional setup after loading the view.
         navigationController?.delegate = self
         
-        play()
+        addPlayerView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,11 +34,14 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
     
     // MARK - Private
     
-    private func play() {
+    private func addPlayerView() {
         if let url = URL(string: "http://10.7.66.56/resource/4AC51038CA4411EED492019D6EA79A50.mp4") {
-            let playV = QHPlayerView.createAt(superView: contentView)
+            var config = QHPlayerPlayConfig()
+            config.control = true
+            config.progress = 1
+            let playV = QHPlayerView.createAt(superView: contentView, initConfig: config)
             playV.prepare(url: url)
-//            let _ = playV.play()
+//            playV.play()
         }
     }
     

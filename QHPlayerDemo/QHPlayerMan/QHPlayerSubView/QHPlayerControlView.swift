@@ -12,7 +12,7 @@ import AVFoundation
 protocol QHPlayerControlViewDelegate: NSObjectProtocol {
     func playerControlTo(_ view: QHPlayerControlView, bPlay: Bool)
     func playerControlTo(_ view: QHPlayerControlView, bMute: Bool)
-    func playerControlTo(_ view: QHPlayerControlView, seek: CGFloat, completionHandler: @escaping (Bool) -> Swift.Void)
+    func playerControlTo(_ view: QHPlayerControlView, seconds: CGFloat, completionHandler: @escaping (Bool) -> Swift.Void)
 }
 
 class QHPlayerControlView: UIView {
@@ -24,7 +24,15 @@ class QHPlayerControlView: UIView {
     var muteBtn: UIButton!
     
     var bTouchSlider = false
-    var playSumTime: CGFloat = 0
+    var playSumTime: Float {
+        set {
+            playS.maximumValue = newValue
+            playSumTimeL.text = "\(Int(newValue))"
+        }
+        get {
+            return playS.maximumValue
+        }
+    }
     
     weak var delegate: QHPlayerControlViewDelegate?
     
@@ -32,7 +40,7 @@ class QHPlayerControlView: UIView {
         #if DEBUG
         print("[\(type(of: self)) \(#function)]")
         #endif
-        p_remove()
+        p_removeNotificaion()
     }
     
     override init(frame: CGRect) {
@@ -52,7 +60,7 @@ class QHPlayerControlView: UIView {
     
     private func p_setup() {
         p_addUI()
-        p_add()
+        p_addNotificaion()
     }
     
     // MARK - Action
@@ -63,17 +71,17 @@ class QHPlayerControlView: UIView {
     }
     
     @objc func muteAction() {
-        delegate?.playerControlTo(self, bMute: muteBtn.isSelected)
+        delegate?.playerControlTo(self, bMute: !muteBtn.isSelected)
         muteBtn.isSelected = !muteBtn.isSelected
     }
     
     @objc func sliderValueChangedAction(slider: UISlider) {
-//        print("\(slider.value)")
+        playTimeL.text = "\(Int(slider.value))"
         bTouchSlider = true
     }
     
     @objc func sliderTouchUpInsideAction(slider: UISlider) {
-        delegate?.playerControlTo(self, seek: CGFloat(slider.value), completionHandler: { (bFinished) in
+        delegate?.playerControlTo(self, seconds: CGFloat(slider.value), completionHandler: { (bFinished) in
             self.bTouchSlider = false
         })
     }
@@ -102,12 +110,12 @@ extension QHPlayerControlView {
 
 extension QHPlayerControlView {
     
-    private func p_add() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.playChangedListener(notif:)), name: NSNotification.Name(rawValue: QHPlayerDefinition.pp), object: nil)
+    private func p_addNotificaion() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.playChangedListener(notif:)), name: NSNotification.Name.QHPlayerProgress, object: nil)
     }
     
-    private func p_remove() {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: QHPlayerDefinition.pp), object: nil)
+    private func p_removeNotificaion() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.QHPlayerProgress, object: nil)
     }
     
     // MARK - Action
@@ -120,12 +128,13 @@ extension QHPlayerControlView {
             if let t = object[0] as? CMTime {
                 let playTimeLValue = CMTimeGetSeconds(t)
                 playTimeL.text = "\(Int(playTimeLValue))"
-                if let st = object[1] as? CMTime {
-                    let playSumTimeLValue = CMTimeGetSeconds(st)
-                    playSumTimeL.text = "\(Int(playSumTimeLValue))"
-                    let p = min(1, max(playTimeLValue/playSumTimeLValue, 0))
-                    playS.value = Float(p)
-                }
+//                if let st = object[1] as? CMTime {
+//                    let playSumTimeLValue = CMTimeGetSeconds(st)
+//                    playSumTimeL.text = "\(Int(playSumTimeLValue))"
+//                    let p = min(1, max(playTimeLValue/playSumTimeLValue, 0))
+//                    playS.value = Float(p)
+//                }
+                playS.value = Float(playTimeLValue)
             }
         }
     }
@@ -189,6 +198,8 @@ extension QHPlayerControlView {
         
         let playS = UISlider()
         playS.value = 0
+        playS.maximumValue = 0
+        playS.minimumValue = 0
         playS.addTarget(self, action: #selector(QHPlayerControlView.sliderValueChangedAction(slider:)), for: .valueChanged)
         playS.addTarget(self, action: #selector(QHPlayerControlView.sliderTouchUpInsideAction(slider:)), for: .touchUpInside)
         playS.addTarget(self, action: #selector(QHPlayerControlView.sliderTouchUpOutsideAction(slider:)), for: .touchUpOutside)
@@ -203,8 +214,8 @@ extension QHPlayerControlView {
         self.playSumTimeL = playSumTimeL
         
         let muteBtn = UIButton(type: .custom)
-        muteBtn.setTitle("🔈", for: .normal)
-        muteBtn.setTitle("🔇", for: .selected)
+        muteBtn.setTitle("🔇", for: .normal)
+        muteBtn.setTitle("🔈", for: .selected)
         muteBtn.titleLabel?.font = UIFont.systemFont(ofSize: fontSizeBtn)
         muteBtn.addTarget(self, action: #selector(QHPlayerControlView.muteAction), for: .touchUpInside)
         p_addFullConstraintsTo(muteBtn, superView: muteBtnView)

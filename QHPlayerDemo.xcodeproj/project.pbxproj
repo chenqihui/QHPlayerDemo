@@ -16,6 +16,9 @@
 		74618959212ED38200838040 /* QHPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74618958212ED38200838040 /* QHPlayerView.swift */; };
 		7461895B212FA67A00838040 /* QHPlayerControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7461895A212FA67A00838040 /* QHPlayerControlView.swift */; };
 		7461895D2130122F00838040 /* QHPlayerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7461895C2130122F00838040 /* QHPlayerConfig.swift */; };
+		749C608D2134FF6B003AF217 /* QHPlayerView+Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C608C2134FF6B003AF217 /* QHPlayerView+Control.swift */; };
+		749C608F213548F5003AF217 /* QHPlayerView+Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C608E213548F5003AF217 /* QHPlayerView+Observer.swift */; };
+		749C60912135494B003AF217 /* QHPlayerView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C60902135494B003AF217 /* QHPlayerView+Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		74618958212ED38200838040 /* QHPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QHPlayerView.swift; sourceTree = "<group>"; };
 		7461895A212FA67A00838040 /* QHPlayerControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QHPlayerControlView.swift; sourceTree = "<group>"; };
 		7461895C2130122F00838040 /* QHPlayerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QHPlayerConfig.swift; sourceTree = "<group>"; };
+		749C608C2134FF6B003AF217 /* QHPlayerView+Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayerView+Control.swift"; sourceTree = "<group>"; };
+		749C608E213548F5003AF217 /* QHPlayerView+Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayerView+Observer.swift"; sourceTree = "<group>"; };
+		749C60902135494B003AF217 /* QHPlayerView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayerView+Util.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +83,22 @@
 		74618945212C025500838040 /* QHPlayerMan */ = {
 			isa = PBXGroup;
 			children = (
+				749C608B2134FECA003AF217 /* QHPlayerSubView */,
 				74618958212ED38200838040 /* QHPlayerView.swift */,
-				7461895A212FA67A00838040 /* QHPlayerControlView.swift */,
+				749C608E213548F5003AF217 /* QHPlayerView+Observer.swift */,
+				749C60902135494B003AF217 /* QHPlayerView+Util.swift */,
 				7461895C2130122F00838040 /* QHPlayerConfig.swift */,
 			);
 			path = QHPlayerMan;
+			sourceTree = "<group>";
+		};
+		749C608B2134FECA003AF217 /* QHPlayerSubView */ = {
+			isa = PBXGroup;
+			children = (
+				7461895A212FA67A00838040 /* QHPlayerControlView.swift */,
+				749C608C2134FF6B003AF217 /* QHPlayerView+Control.swift */,
+			);
+			path = QHPlayerSubView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,11 +173,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				74618936212C01FA00838040 /* ViewController.swift in Sources */,
+				749C60912135494B003AF217 /* QHPlayerView+Util.swift in Sources */,
 				74618957212EA13300838040 /* PlayViewController.swift in Sources */,
+				749C608F213548F5003AF217 /* QHPlayerView+Observer.swift in Sources */,
 				74618959212ED38200838040 /* QHPlayerView.swift in Sources */,
 				74618934212C01FA00838040 /* AppDelegate.swift in Sources */,
 				7461895B212FA67A00838040 /* QHPlayerControlView.swift in Sources */,
 				7461895D2130122F00838040 /* QHPlayerConfig.swift in Sources */,
+				749C608D2134FF6B003AF217 /* QHPlayerView+Control.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
