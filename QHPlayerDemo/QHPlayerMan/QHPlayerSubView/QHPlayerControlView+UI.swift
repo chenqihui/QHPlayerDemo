@@ -147,10 +147,14 @@ extension QHPlayerControlView {
     func p_portrait() {
         let spaceH = bottomView.layer.cornerRadius
         
+        var bottomSpace: CGFloat = 10
+        if p_isX() {
+            bottomSpace += 20
+        }
         let viewsDict = ["bottomView": bottomView!]
         bottomHLC = NSLayoutConstraint.constraints(withVisualFormat: "|-20-[bottomView]-20-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict)
         addConstraints(bottomHLC!)
-        bottomVLC = NSLayoutConstraint.constraints(withVisualFormat: "V:[bottomView(90)]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict)
+        bottomVLC = NSLayoutConstraint.constraints(withVisualFormat: "V:[bottomView(90)]-\(bottomSpace)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict)
         addConstraints(bottomVLC!)
         
         let viewsDict2 = ["playSliderView": playSliderView!]
@@ -177,7 +181,11 @@ extension QHPlayerControlView {
         let viewsDict = ["bottomView": bottomView!]
         bottomHLC = NSLayoutConstraint.constraints(withVisualFormat: "|-20-[bottomView]-20-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict)
         addConstraints(bottomHLC!)
-        bottomVLC = NSLayoutConstraint.constraints(withVisualFormat: "V:[bottomView(40)]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict)
+        var bottomSpace: CGFloat = 10
+        if p_isX() {
+            bottomSpace += 20
+        }
+        bottomVLC = NSLayoutConstraint.constraints(withVisualFormat: "V:[bottomView(40)]-\(bottomSpace)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict)
         addConstraints(bottomVLC!)
         
         let viewsDict1 = ["buttonView": buttonView, "playTimeView": playTimeView, "playSliderView": playSliderView, "playSumTimeView": playSumTimeView] as [String: Any]
@@ -265,7 +273,12 @@ extension QHPlayerControlView {
     func p_addTopRightViewConstraints() {
         let spaceH = bottomView.layer.cornerRadius
         
-        addConstraint(NSLayoutConstraint(item: topRightView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 20))
+        var bottomSpace: CGFloat = 30
+        if p_isX() {
+            bottomSpace += 20
+        }
+        
+        addConstraint(NSLayoutConstraint(item: topRightView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: bottomSpace))
         addConstraint(NSLayoutConstraint(item: topRightView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -20))
 
 //        let viewsDict1 = ["topRightView": topRightView!]
@@ -276,7 +289,7 @@ extension QHPlayerControlView {
         
         let viewsDict = ["gravityBtn": gravityBtn, "muteBtn": muteBtn, "volumeS": volumeS] as [String: Any]
         topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-\(spaceH)-[volumeS(80)]-0-[muteBtn(40)]-0-[gravityBtn(40)]-\(spaceH)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
-        topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[gravityBtn]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
+        topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[gravityBtn(50)]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
         topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[muteBtn]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
         topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[volumeS]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
     }

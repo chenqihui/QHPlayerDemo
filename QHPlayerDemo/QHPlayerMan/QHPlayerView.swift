@@ -60,7 +60,11 @@ extension QHPlayerView {
                 playerLayer.player = nil
             }
             let player = AVPlayer(playerItem: playerItem)
-            player.automaticallyWaitsToMinimizeStalling = false
+            if #available(iOS 10.0, *) {
+                player.automaticallyWaitsToMinimizeStalling = false
+            } else {
+                // Fallback on earlier versions
+            }
             playerLayer.player = player
             
             playerLayer.videoGravity = playConfig.videoGravity

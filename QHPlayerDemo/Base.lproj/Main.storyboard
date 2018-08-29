@@ -48,41 +48,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eNY-tx-TBf">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M3z-5S-PLX">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVj-o0-KVA">
-                                        <rect key="frame" x="20" y="20" width="34" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="6xn-7Z-F0q"/>
-                                        </constraints>
-                                        <state key="normal" title="back"/>
-                                        <connections>
-                                            <action selector="backAction:" destination="zv9-3W-Q7w" eventType="touchUpInside" id="OlU-we-jzv"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="JVj-o0-KVA" firstAttribute="leading" secondItem="eNY-tx-TBf" secondAttribute="leading" constant="20" id="Dgn-Ab-5PE"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="JVj-o0-KVA" secondAttribute="trailing" constant="20" symbolic="YES" id="b2E-5F-y9d"/>
-                                    <constraint firstItem="JVj-o0-KVA" firstAttribute="top" secondItem="eNY-tx-TBf" secondAttribute="top" constant="20" id="bmL-bc-KDg"/>
                                     <constraint firstAttribute="trailing" secondItem="M3z-5S-PLX" secondAttribute="trailing" id="brH-g1-dMv"/>
                                     <constraint firstItem="M3z-5S-PLX" firstAttribute="leading" secondItem="eNY-tx-TBf" secondAttribute="leading" id="dEl-fx-iKP"/>
                                     <constraint firstItem="M3z-5S-PLX" firstAttribute="top" secondItem="eNY-tx-TBf" secondAttribute="top" id="nME-tI-fwf"/>
                                     <constraint firstAttribute="bottom" secondItem="M3z-5S-PLX" secondAttribute="bottom" id="rXC-w9-Eju"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVj-o0-KVA">
+                                <rect key="frame" x="20" y="40" width="40" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="6xn-7Z-F0q"/>
+                                </constraints>
+                                <state key="normal" title="back">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="backAction:" destination="zv9-3W-Q7w" eventType="touchUpInside" id="OlU-we-jzv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="eNY-tx-TBf" firstAttribute="top" secondItem="PGG-R5-mLw" secondAttribute="top" id="01l-ez-I8T"/>
-                            <constraint firstItem="PGG-R5-mLw" firstAttribute="bottom" secondItem="eNY-tx-TBf" secondAttribute="bottom" id="U9O-R9-4T7"/>
-                            <constraint firstItem="eNY-tx-TBf" firstAttribute="leading" secondItem="PGG-R5-mLw" secondAttribute="leading" id="Uc1-fB-JsX"/>
-                            <constraint firstItem="PGG-R5-mLw" firstAttribute="trailing" secondItem="eNY-tx-TBf" secondAttribute="trailing" id="YZ0-Vb-kST"/>
+                            <constraint firstItem="eNY-tx-TBf" firstAttribute="top" secondItem="2Av-Lp-wxd" secondAttribute="top" id="01l-ez-I8T"/>
+                            <constraint firstItem="JVj-o0-KVA" firstAttribute="top" secondItem="PGG-R5-mLw" secondAttribute="top" constant="20" id="Gee-S9-v1V"/>
+                            <constraint firstAttribute="bottom" secondItem="eNY-tx-TBf" secondAttribute="bottom" id="U9O-R9-4T7"/>
+                            <constraint firstItem="eNY-tx-TBf" firstAttribute="leading" secondItem="2Av-Lp-wxd" secondAttribute="leading" id="Uc1-fB-JsX"/>
+                            <constraint firstAttribute="trailing" secondItem="eNY-tx-TBf" secondAttribute="trailing" id="YZ0-Vb-kST"/>
+                            <constraint firstItem="JVj-o0-KVA" firstAttribute="leading" secondItem="PGG-R5-mLw" secondAttribute="leading" constant="20" id="y6G-cq-9jG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PGG-R5-mLw"/>
                     </view>

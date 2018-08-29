@@ -178,6 +178,19 @@ extension QHPlayerControlView {
         let bottomLC = NSLayoutConstraint(item: view, attribute: .bottom, relatedBy: .equal, toItem: superView, attribute: .bottom, multiplier: 1, constant: 0)
         superView.addConstraints([leftLC, rightLC, topLC, bottomLC])
     }
+    
+    func p_isX() -> Bool {
+        if UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone {
+            if UIScreen.instancesRespond(to:#selector(getter: UIScreen.main.currentMode)) {
+                if let size = UIScreen.main.currentMode?.size {
+                    if __CGSizeEqualToSize(CGSize(width:1125, height:2436), size) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
 }
 
 // MARK - Action
