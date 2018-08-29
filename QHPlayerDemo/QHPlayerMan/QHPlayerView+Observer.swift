@@ -76,14 +76,13 @@ extension QHPlayerView {
             }
         }
         else if keyPath == "loadedTimeRanges" {
-//            print("loadedTimeRanges")
-            let loadedTimeRange = p_player()?.currentItem?.loadedTimeRanges
-            if let timeRange = loadedTimeRange?.first as? CMTimeRange {
-                let startSeconds = CMTimeGetSeconds(timeRange.start)
-                let durationSeconds = CMTimeGetSeconds(timeRange.duration)
-                let timeInterval = startSeconds + durationSeconds
-                print("\(timeInterval)")
-            }
+//            let loadedTimeRange = p_player()?.currentItem?.loadedTimeRanges
+//            if let timeRange = loadedTimeRange?.first as? CMTimeRange {
+//                let startSeconds = CMTimeGetSeconds(timeRange.start)
+//                let durationSeconds = CMTimeGetSeconds(timeRange.duration)
+//                let timeInterval = startSeconds + durationSeconds
+//                print("\(timeInterval)")
+//            }
         }
         else if keyPath == "playbackBufferEmpty" {
             print("playbackBufferEmpty")

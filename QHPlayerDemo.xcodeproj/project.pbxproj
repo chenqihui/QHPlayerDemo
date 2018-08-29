@@ -20,6 +20,7 @@
 		749C608F213548F5003AF217 /* QHPlayerView+Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C608E213548F5003AF217 /* QHPlayerView+Observer.swift */; };
 		749C60912135494B003AF217 /* QHPlayerView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C60902135494B003AF217 /* QHPlayerView+Util.swift */; };
 		749C609321354CF4003AF217 /* QHPlayer+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C609221354CF4003AF217 /* QHPlayer+API.swift */; };
+		74B4749821363D7100048981 /* QHPlayerControlView+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B4749721363D7100048981 /* QHPlayerControlView+UI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		749C608E213548F5003AF217 /* QHPlayerView+Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayerView+Observer.swift"; sourceTree = "<group>"; };
 		749C60902135494B003AF217 /* QHPlayerView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayerView+Util.swift"; sourceTree = "<group>"; };
 		749C609221354CF4003AF217 /* QHPlayer+API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayer+API.swift"; sourceTree = "<group>"; };
+		74B4749721363D7100048981 /* QHPlayerControlView+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayerControlView+UI.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				7461895A212FA67A00838040 /* QHPlayerControlView.swift */,
+				74B4749721363D7100048981 /* QHPlayerControlView+UI.swift */,
 				749C608C2134FF6B003AF217 /* QHPlayerView+Control.swift */,
 			);
 			path = QHPlayerSubView;
@@ -181,6 +184,7 @@
 				749C608F213548F5003AF217 /* QHPlayerView+Observer.swift in Sources */,
 				74618959212ED38200838040 /* QHPlayerView.swift in Sources */,
 				74618934212C01FA00838040 /* AppDelegate.swift in Sources */,
+				74B4749821363D7100048981 /* QHPlayerControlView+UI.swift in Sources */,
 				749C609321354CF4003AF217 /* QHPlayer+API.swift in Sources */,
 				7461895B212FA67A00838040 /* QHPlayerControlView.swift in Sources */,
 				7461895D2130122F00838040 /* QHPlayerConfig.swift in Sources */,

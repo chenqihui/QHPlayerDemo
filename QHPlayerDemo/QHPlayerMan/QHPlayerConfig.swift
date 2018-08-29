@@ -25,7 +25,8 @@ struct QHPlayerPlayConfig {
     // 准备好自动播放
     var autoPlay = false
     // 循环播放
-    // 静音
+    // 声音
+    var volume: Float = 0.5
     // 缓存
     // 填充模式
     var videoGravity: AVLayerVideoGravity = .resizeAspect
@@ -37,6 +38,7 @@ class QHPlayerDefinition: NSObject {
 }
 
 extension NSNotification.Name {
+    
     public static let QHPlayerProgress: NSNotification.Name = NSNotification.Name(rawValue: "QHPlayerProgress")
     
     public static let QHPlayerItemStatus: NSNotification.Name = NSNotification.Name(rawValue: "QHPlayerItemStatus")

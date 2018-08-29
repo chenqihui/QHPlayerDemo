@@ -39,7 +39,19 @@ extension QHPlayerView {
         }
     }
     
+    func seekToward(to seconds: Float64, completionHandler: @escaping (Bool) -> Swift.Void) {
+        p_seekToward(to: seconds, completionHandler: completionHandler)
+    }
+    
+    func gravity(is bGravity: Bool) {
+        p_gravity(is: bGravity)
+    }
+    
     func mute(is bMute: Bool) {
         p_mute(is: bMute)
+    }
+    
+    func volume(to volume: Float) {
+        p_volume(to: volume)
     }
 }

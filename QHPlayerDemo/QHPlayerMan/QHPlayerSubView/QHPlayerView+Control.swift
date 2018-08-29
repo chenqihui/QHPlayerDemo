@@ -37,4 +37,18 @@ extension QHPlayerView: QHPlayerControlViewDelegate {
             completionHandler(bFinished)
         }
     }
+    
+    func playerControlTo(_ view: QHPlayerControlView, toward: CGFloat, completionHandler: @escaping (Bool) -> Swift.Void) {
+        seekToward(to: Float64(toward)) { (bFinished) in
+            completionHandler(bFinished)
+        }
+    }
+    
+    func playerControlTo(_ view: QHPlayerControlView, bGravity: Bool) {
+        gravity(is: bGravity)
+    }
+    
+    func playerControlTo(_ view: QHPlayerControlView, volume to: Float) {
+        volume(to: to)
+    }
 }

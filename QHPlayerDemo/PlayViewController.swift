@@ -35,8 +35,8 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
     // MARK - Private
     
     private func addPlayerView() {
-//        if let url = URL(string: "http://10.7.66.56/resource/4AC51038CA4411EED492019D6EA79A50.mp4") {
-        if let url = URL(string: "http://192.168.2.17/resource/4AC51038CA4411EED492019D6EA79A50.mp4") {
+        if let url = URL(string: "http://10.7.66.56/resource/4AC51038CA4411EED492019D6EA79A50.mp4") {
+//        if let url = URL(string: "http://192.168.2.17/resource/4AC51038CA4411EED492019D6EA79A50.mp4") {
             var config = QHPlayerPlayConfig()
             config.control = true
             config.progress = 1

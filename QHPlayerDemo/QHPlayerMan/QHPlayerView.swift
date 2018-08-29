@@ -45,6 +45,7 @@ class QHPlayerView: UIView {
     // MARK - Private
     
     private func p_setup() {
+        backgroundColor = UIColor.black
         p_addPlayControlView()
     }
 }
@@ -63,12 +64,14 @@ extension QHPlayerView {
             playerLayer.player = player
             
             playerLayer.videoGravity = playConfig.videoGravity
+            player.volume = playConfig.volume
             
             p_addVideoKVO()
             p_addVideoTimerObserver()
             p_addVideoNotificaion()
             
             playControlV?.playSumTime = Float(p_currentItemDuration())
+            playControlV?.volume = Float(player.volume)
         }
     }
     
@@ -103,6 +106,32 @@ extension QHPlayerView {
     func p_mute(is bMute: Bool) {
         if let player = p_player() {
             player.isMuted = bMute
+        }
+    }
+    
+    func p_gravity(is bGravity: Bool) {
+        if let playerLayer = layer as? AVPlayerLayer {
+            if bGravity == true {
+                playerLayer.videoGravity = .resizeAspectFill
+            }
+            else {
+                playerLayer.videoGravity = .resizeAspect
+            }
+        }
+    }
+    
+    func p_seekToward(to seconds: Float64, completionHandler: @escaping (Bool) -> Swift.Void) {
+        if let currentTime = p_player()?.currentTime() {
+            let toSeconds = min(max(CMTimeGetSeconds(currentTime) + seconds, 0), Double(p_currentItemDuration()))
+            p_seek(to: toSeconds) { (bFinished) in
+                completionHandler(bFinished)
+            }
+        }
+    }
+    
+    func p_volume(to volume: Float) {
+        if let player = p_player() {
+            player.volume = max(min(volume, 1), 0)
         }
     }
 }
