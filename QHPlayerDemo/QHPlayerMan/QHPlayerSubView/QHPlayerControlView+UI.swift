@@ -293,4 +293,9 @@ extension QHPlayerControlView {
         topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[muteBtn]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
         topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[volumeS]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
     }
+    
+    func p_control(isHidden bHidden: Bool) {
+        bottomView.isHidden = bHidden
+        topRightView.isHidden = bHidden
+    }
 }

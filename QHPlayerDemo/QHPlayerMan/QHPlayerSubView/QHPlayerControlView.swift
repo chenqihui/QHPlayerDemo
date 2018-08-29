@@ -48,6 +48,8 @@ class QHPlayerControlView: UIView {
     var volumeS: UISlider!
     // --------------------------------
     
+    var hideControlTimer: Timer?
+    
     var bTouchSlider = false
     var playSumTime: Float {
         set {
@@ -101,6 +103,24 @@ class QHPlayerControlView: UIView {
     private func p_setup() {
         p_addUI()
         p_addNotificaion()
+        p_hideControlTimer()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(QHPlayerControlView.tapAction))
+        addGestureRecognizer(tap)
+    }
+    
+    func p_hideControlTimer() {
+        if let timer = hideControlTimer {
+            if timer.isValid == true {
+                timer.invalidate()
+                hideControlTimer = nil
+                p_control(isHidden: true)
+                return
+            }
+            hideControlTimer = nil
+        }
+        p_control(isHidden: false)
+        hideControlTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(QHPlayerControlView.hideControlTimerAction), userInfo: nil, repeats: false)
     }
 }
 
@@ -243,5 +263,13 @@ extension QHPlayerControlView {
     
     @objc func volumeSliderValueChangedAction(slider: UISlider) {
         delegate?.playerControlTo(self, volume : slider.value)
+    }
+    
+    @objc func hideControlTimerAction() {
+        p_control(isHidden: true)
+    }
+    
+    @objc func tapAction() {
+        p_hideControlTimer()
     }
 }
