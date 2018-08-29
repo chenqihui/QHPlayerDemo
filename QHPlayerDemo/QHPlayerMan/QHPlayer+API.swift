@@ -54,4 +54,8 @@ extension QHPlayerView {
     func volume(to volume: Float) {
         p_volume(to: volume)
     }
+    
+    func currentItemDuration() -> CGFloat {
+        return p_currentItemDuration()
+    }
 }

@@ -62,15 +62,18 @@ extension QHPlayerView {
             if let c = change {
                 if let statusValue = c[.newKey] as? Int {
                     if let status = AVPlayerItemStatus(rawValue: statusValue) {
+                        var obj = [Any]()
+                        obj.append(status)
                         switch status {
                         case .unknown:
                             print("unknown")
                         case .readyToPlay:
                             print("readyToPlay")
+                            obj.append(p_currentItemDuration())
                         case .failed:
                             print("failes")
                         }
-                        NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemStatus, object: [status])
+                        NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemStatus, object: obj)
                     }
                 }
             }

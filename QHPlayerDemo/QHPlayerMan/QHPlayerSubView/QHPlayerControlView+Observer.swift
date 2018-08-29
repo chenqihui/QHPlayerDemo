@@ -48,6 +48,9 @@ extension QHPlayerControlView {
         if let object = notif.object as? [Any] {
             if let status = object[0] as? AVPlayerItemStatus {
                 if status == .readyToPlay {
+                    if let duration = object[1] as? CGFloat {
+                        playSumTime = Float(duration)
+                    }
                     bReadyToPlay = true
                 }
                 else {
