@@ -39,16 +39,12 @@ class QHPlayerControlView: UIView {
     // --------------------------------
     
     // topRightView -------------------
-    var muteBtnView: UIView!
-    var gravityBtnView: UIView!
-    var volumeSView: UIView!
-    
     var muteBtn: UIButton!
     var gravityBtn: UIButton!
     var volumeS: UISlider!
     // --------------------------------
     
-    var hideControlTimer: Timer?
+//    var hideControlTimer: Timer?
     
     var bTouchSlider = false
     var playSumTime: Float {
@@ -77,8 +73,7 @@ class QHPlayerControlView: UIView {
     var statusBarOrientation: UIInterfaceOrientation = .unknown
     var bottomHLC: [NSLayoutConstraint]?
     var bottomVLC: [NSLayoutConstraint]?
-//    var topRightHLC: [NSLayoutConstraint]?
-//    var topRightVLC: [NSLayoutConstraint]?
+    var volumeWLC: NSLayoutConstraint?
     
     deinit {
         #if DEBUG
@@ -105,25 +100,25 @@ class QHPlayerControlView: UIView {
     private func p_setup() {
         p_addUI()
         p_addNotificaion()
-        p_hideControlTimer()
+//        p_hideControlTimer()
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(QHPlayerControlView.tapAction))
         addGestureRecognizer(tap)
     }
     
-    func p_hideControlTimer() {
-        if let timer = hideControlTimer {
-            if timer.isValid == true {
-                timer.invalidate()
-                hideControlTimer = nil
-                p_control(isHidden: true)
-                return
-            }
-            hideControlTimer = nil
-        }
-        p_control(isHidden: false)
-        hideControlTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(QHPlayerControlView.hideControlTimerAction), userInfo: nil, repeats: false)
-    }
+//    func p_hideControlTimer() {
+//        if let timer = hideControlTimer {
+//            if timer.isValid == true {
+//                timer.invalidate()
+//                hideControlTimer = nil
+//                p_control(isHidden: true)
+//                return
+//            }
+//            hideControlTimer = nil
+//        }
+//        p_control(isHidden: false)
+//        hideControlTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(QHPlayerControlView.hideControlTimerAction), userInfo: nil, repeats: false)
+//    }
 }
 
 // MARK - Public
@@ -178,5 +173,19 @@ extension QHPlayerControlView {
             }
         }
         return false
+    }
+    
+    class func createImageWithColor(_ color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) -> UIImage? {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.addEllipse(in: rect)
+        context?.clip()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
 }

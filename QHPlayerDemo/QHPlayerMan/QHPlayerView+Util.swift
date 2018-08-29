@@ -28,4 +28,15 @@ extension QHPlayerView {
         }
         return 0
     }
+    
+    func p_log(_ log: String) {
+        if playConfig.log == true {
+            #if DEBUG
+            print(log)
+            #endif
+        }
+        if logBlock != nil {
+            logBlock!(log)
+        }
+    }
 }

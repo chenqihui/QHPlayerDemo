@@ -91,6 +91,7 @@ extension QHPlayerControlView {
     }
     
     @objc func tapAction() {
-        p_hideControlTimer()
+//        p_hideControlTimer()
+        p_control(isHidden: !bottomView.isHidden)
     }
 }

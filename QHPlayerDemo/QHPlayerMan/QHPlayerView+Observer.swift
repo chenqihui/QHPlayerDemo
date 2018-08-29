@@ -32,7 +32,8 @@ extension QHPlayerView {
                 let interval = CMTimeMakeWithSeconds(playConfig.progress, Int32(NSEC_PER_SEC));
                 timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: nil) { [weak self] (time) in
                     if self != nil {
-                        NotificationCenter.default.post(name: NSNotification.Name.QHPlayerProgress, object: [time])//, self.p_currentItemDuration()
+                        let playTimeLValue = CMTimeGetSeconds(time)
+                        NotificationCenter.default.post(name: NSNotification.Name.QHPlayerProgress, object: [QHPlayerDefinition.QHPlayerProgressKey: playTimeLValue])
                     }
                 }
             }
@@ -62,16 +63,16 @@ extension QHPlayerView {
             if let c = change {
                 if let statusValue = c[.newKey] as? Int {
                     if let status = AVPlayerItemStatus(rawValue: statusValue) {
-                        var obj = [Any]()
-                        obj.append(status)
+                        var obj = [String: Any]()
+                        obj[QHPlayerDefinition.QHPlayerItemStatusKey] = status
                         switch status {
                         case .unknown:
-                            print("unknown")
+                            p_log("unknown")
                         case .readyToPlay:
-                            print("readyToPlay")
-                            obj.append(p_currentItemDuration())
+                            p_log("readyToPlay")
+                            obj[QHPlayerDefinition.QHPlayerItemDurationKey] = p_currentItemDuration()
                         case .failed:
-                            print("failes")
+                            p_log("failes")
                         }
                         NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemStatus, object: obj)
                     }
@@ -88,20 +89,28 @@ extension QHPlayerView {
 //            }
         }
         else if keyPath == "playbackBufferEmpty" {
-            print("playbackBufferEmpty")
-            NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemBuffer, object: true)
+            p_log("playbackBufferEmpty")
+            NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemBuffer, object: [QHPlayerDefinition.QHPlayerItemBufferKey: true])
         }
         else if keyPath == "playbackLikelyToKeepUp" {
-            print("playbackLikelyToKeepUp")
-            NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemBuffer, object: false)
+            p_log("playbackLikelyToKeepUp")
+            NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemBuffer, object: [QHPlayerDefinition.QHPlayerItemBufferKey: false])
         }
     }
     
     @objc func playerItemDidPlayToEndTime(notif: Notification) {
-        print("playerItemDidPlayToEndTime")
+        p_log("playerItemDidPlayToEndTime")
+        NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemDidPlayToEndTime, object: nil)
     }
     
     @objc func playerItemFailedToPlayToEndTime(notif: Notification) {
-        print("playerItemFailedToPlayToEndTime")
+        p_log("playerItemFailedToPlayToEndTime")
+        var error = "unknow"
+        if let obj = notif.object as? [String: Any] {
+            if let err = obj[AVPlayerItemFailedToPlayToEndTimeErrorKey] {
+                error = "\(err)"
+            }
+        }
+        NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemFailedToPlayToEndTime, object: [QHPlayerDefinition.QHPlayerItemFailedToPlayToEndTimeErrorKey: error])
     }
 }

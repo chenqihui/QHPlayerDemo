@@ -12,9 +12,9 @@ extension QHPlayerControlView {
     
     func p_addUI() {
         p_addBottom()
-        p_addConstraints()
         p_addTopRightView()
-        return
+        p_addTopRightViewConstraints()
+        p_addConstraints()
     }
 }
 
@@ -66,6 +66,9 @@ extension QHPlayerControlView {
         playS.value = 0
         playS.maximumValue = 0
         playS.minimumValue = 0
+        if let image = QHPlayerControlView.createImageWithColor(UIColor.white, size: CGSize(width: 10, height: 10)) {
+            playS.setThumbImage(image, for: .normal)
+        }
         playS.addTarget(self, action: #selector(QHPlayerControlView.sliderValueChangedAction(slider:)), for: .valueChanged)
         playS.addTarget(self, action: #selector(QHPlayerControlView.sliderTouchUpInsideAction(slider:)), for: .touchUpInside)
         playS.addTarget(self, action: #selector(QHPlayerControlView.sliderTouchUpOutsideAction(slider:)), for: .touchUpOutside)
@@ -97,7 +100,7 @@ extension QHPlayerControlView {
         let viewsDict = ["playBtnV": playBtnV]
         buttonView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[playBtnV]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
         buttonView.addConstraint(NSLayoutConstraint(item: playBtnV, attribute: .centerX, relatedBy: .equal, toItem: buttonView, attribute: .centerX, multiplier: 1, constant: 0))
-        playBtnV.addConstraint(NSLayoutConstraint(item: playBtnV, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 40))
+        playBtnV.addConstraint(NSLayoutConstraint(item: playBtnV, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 50))
         
         let playBackwardBtnV = UIView()
         playBackwardBtnV.backgroundColor = UIColor.clear
@@ -106,7 +109,7 @@ extension QHPlayerControlView {
         let viewsDict1 = ["playBackwardBtnV": playBackwardBtnV]
         buttonView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[playBackwardBtnV]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict1))
         buttonView.addConstraint(NSLayoutConstraint(item: playBackwardBtnV, attribute: .right, relatedBy: .equal, toItem: playBtnV, attribute: .left, multiplier: 1, constant: 0))
-        playBackwardBtnV.addConstraint(NSLayoutConstraint(item: playBackwardBtnV, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 40))
+        playBackwardBtnV.addConstraint(NSLayoutConstraint(item: playBackwardBtnV, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 50))
         
         let playForwardBtnV = UIView()
         playForwardBtnV.backgroundColor = UIColor.clear
@@ -115,7 +118,7 @@ extension QHPlayerControlView {
         let viewsDict2 = ["playForwardBtnV": playForwardBtnV]
         buttonView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[playForwardBtnV]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict2))
         buttonView.addConstraint(NSLayoutConstraint(item: playForwardBtnV, attribute: .left, relatedBy: .equal, toItem: playBtnV, attribute: .right, multiplier: 1, constant: 0))
-        playForwardBtnV.addConstraint(NSLayoutConstraint(item: playForwardBtnV, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 40))
+        playForwardBtnV.addConstraint(NSLayoutConstraint(item: playForwardBtnV, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 50))
         
         // play
         let playBtn = UIButton(type: .custom)
@@ -159,19 +162,19 @@ extension QHPlayerControlView {
         
         let viewsDict2 = ["playSliderView": playSliderView!]
         bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-\(spaceH)-[playSliderView]-\(spaceH)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict2))
-        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[playSliderView(30)]", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict2))
+        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[playSliderView(25)]", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict2))
         
         let viewsDict3 = ["playTimeView": playTimeView!]
         bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-\(spaceH)-[playTimeView(60)]|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict3))
-        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[playTimeView(20)]", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict3))
+        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[playTimeView(15)]", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict3))
         
         let viewsDict4 = ["playSumTimeView": playSumTimeView!]
         bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "[playSumTimeView(60)]-\(spaceH)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict4))
-        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[playSumTimeView(20)]", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict4))
+        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[playSumTimeView(15)]", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict4))
         
         let viewsDict5 = ["buttonView": buttonView!]
         bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-\(spaceH)-[buttonView]-\(spaceH)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict5))
-        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[buttonView(40)]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict5))
+        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[buttonView(50)]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict5))
     }
     
     func p_landscape() {
@@ -185,11 +188,11 @@ extension QHPlayerControlView {
         if p_isX() {
             bottomSpace += 20
         }
-        bottomVLC = NSLayoutConstraint.constraints(withVisualFormat: "V:[bottomView(40)]-\(bottomSpace)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict)
+        bottomVLC = NSLayoutConstraint.constraints(withVisualFormat: "V:[bottomView(50)]-\(bottomSpace)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict)
         addConstraints(bottomVLC!)
         
         let viewsDict1 = ["buttonView": buttonView, "playTimeView": playTimeView, "playSliderView": playSliderView, "playSumTimeView": playSumTimeView] as [String: Any]
-        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-\(spaceH)-[buttonView(120)]-0-[playTimeView(60)]-0-[playSliderView]-0-[playSumTimeView(60)]-\(spaceH)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict1))
+        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-\(spaceH)-[buttonView(150)]-0-[playTimeView(60)]-0-[playSliderView]-0-[playSumTimeView(60)]-\(spaceH)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict1))
         bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[buttonView]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict1))
         bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[playTimeView]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict1))
         bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[playSliderView]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict1))
@@ -206,10 +209,18 @@ extension QHPlayerControlView {
         if statusBarOrientation.isPortrait {
             p_removeConstraints()
             p_portrait()
+            if let vWLV = volumeWLC {
+                vWLV.constant = 0
+                volumeS.isHidden = true
+            }
         }
         else if statusBarOrientation.isLandscape {
             p_removeConstraints()
             p_landscape()
+            if let vWLV = volumeWLC {
+                vWLV.constant = 80
+                volumeS.isHidden = false
+            }
         }
     }
     
@@ -226,6 +237,9 @@ extension QHPlayerControlView {
     }
     
     func p_addTopRightView() {
+        
+        let spaceH = bottomView.layer.cornerRadius
+        
         let topRightV = UIView()
         topRightV.layer.masksToBounds = true
         topRightV.layer.cornerRadius = 15
@@ -234,6 +248,36 @@ extension QHPlayerControlView {
         topRightV.translatesAutoresizingMaskIntoConstraints = false
         topRightView = topRightV
         
+        let gravityBtnV = UIView()
+        gravityBtnV.backgroundColor = UIColor.clear
+        topRightView.addSubview(gravityBtnV)
+        gravityBtnV.translatesAutoresizingMaskIntoConstraints = false
+        let viewsDict = ["gravityBtnV": gravityBtnV]
+        topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[gravityBtnV]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
+        topRightView.addConstraint(NSLayoutConstraint(item: gravityBtnV, attribute: .right, relatedBy: .equal, toItem: topRightView, attribute: .right, multiplier: 1, constant: -spaceH))
+        gravityBtnV.addConstraint(NSLayoutConstraint(item: gravityBtnV, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 50))
+        gravityBtnV.addConstraint(NSLayoutConstraint(item: gravityBtnV, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 50))
+        
+        let muteBtnV = UIView()
+        muteBtnV.backgroundColor = UIColor.clear
+        topRightView.addSubview(muteBtnV)
+        muteBtnV.translatesAutoresizingMaskIntoConstraints = false
+        let viewsDict1 = ["muteBtnV": muteBtnV]
+        topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[muteBtnV]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict1))
+        topRightView.addConstraint(NSLayoutConstraint(item: muteBtnV, attribute: .right, relatedBy: .equal, toItem: gravityBtnV, attribute: .left, multiplier: 1, constant: 0))
+        muteBtnV.addConstraint(NSLayoutConstraint(item: muteBtnV, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 50))
+        
+        let volumeSV = UIView()
+        volumeSV.backgroundColor = UIColor.clear
+        topRightView.addSubview(volumeSV)
+        volumeSV.translatesAutoresizingMaskIntoConstraints = false
+        let viewsDict2 = ["volumeSV": volumeSV]
+        topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[volumeSV]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict2))
+        topRightView.addConstraint(NSLayoutConstraint(item: volumeSV, attribute: .left, relatedBy: .equal, toItem: topRightView, attribute: .left, multiplier: 1, constant: spaceH))
+        topRightView.addConstraint(NSLayoutConstraint(item: volumeSV, attribute: .right, relatedBy: .equal, toItem: muteBtnV, attribute: .left, multiplier: 1, constant: 0))
+        volumeWLC = NSLayoutConstraint(item: volumeSV, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .width, multiplier: 1, constant: 80)
+        volumeSV.addConstraint(volumeWLC!)
+        
         // gravity
         let gravityBtn = UIButton(type: .custom)
         gravityBtn.backgroundColor = UIColor.clear
@@ -241,10 +285,9 @@ extension QHPlayerControlView {
         gravityBtn.setTitle("↔️", for: .selected)
         gravityBtn.titleLabel?.font = UIFont.systemFont(ofSize: QHPlayerControlView.fontSizeBtn)
         gravityBtn.addTarget(self, action: #selector(QHPlayerControlView.gravityAction), for: .touchUpInside)
-        topRightView.addSubview(gravityBtn)
-        gravityBtn.translatesAutoresizingMaskIntoConstraints = false
+        p_addFullConstraintsTo(gravityBtn, superView: gravityBtnV)
         self.gravityBtn = gravityBtn
-        
+
         // mute 🔈🔉🔊🔇
         let muteBtn = UIButton(type: .custom)
         muteBtn.backgroundColor = UIColor.clear
@@ -252,46 +295,34 @@ extension QHPlayerControlView {
         muteBtn.setTitle("🔇", for: .selected)
         muteBtn.titleLabel?.font = UIFont.systemFont(ofSize: QHPlayerControlView.fontSizeBtn)
         muteBtn.addTarget(self, action: #selector(QHPlayerControlView.muteAction), for: .touchUpInside)
-        topRightView.addSubview(muteBtn)
-        muteBtn.translatesAutoresizingMaskIntoConstraints = false
+        p_addFullConstraintsTo(muteBtn, superView: muteBtnV)
         self.muteBtn = muteBtn
-        
+
         // slider
         let volumeS = UISlider()
         volumeS.backgroundColor = UIColor.clear
         volumeS.value = 0
         volumeS.maximumValue = 1
         volumeS.minimumValue = 0
+        if let image = QHPlayerControlView.createImageWithColor(UIColor.white, size: CGSize(width: 10, height: 10)) {
+            volumeS.setThumbImage(image, for: .normal)
+        }
         volumeS.addTarget(self, action: #selector(QHPlayerControlView.volumeSliderValueChangedAction(slider:)), for: .valueChanged)
-        topRightView.addSubview(volumeS)
-        volumeS.translatesAutoresizingMaskIntoConstraints = false
+        p_addFullConstraintsTo(volumeS, superView: volumeSV)
         self.volumeS = volumeS
-        
-        p_addTopRightViewConstraints()
     }
     
     func p_addTopRightViewConstraints() {
-        let spaceH = bottomView.layer.cornerRadius
-        
         var bottomSpace: CGFloat = 30
         if p_isX() {
             bottomSpace += 20
         }
         
-        addConstraint(NSLayoutConstraint(item: topRightView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: bottomSpace))
-        addConstraint(NSLayoutConstraint(item: topRightView, attribute: .trailing, relatedBy: .equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -20))
-
-//        let viewsDict1 = ["topRightView": topRightView!]
-//        topRightHLC = NSLayoutConstraint.constraints(withVisualFormat: "[topRightView(190)]-20-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict1)
-//        addConstraints(topRightHLC!)
-//        topRightVLC = NSLayoutConstraint.constraints(withVisualFormat: "V:|-20-[topRightView(40)]", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict1)
-//        addConstraints(topRightVLC!)
-        
-        let viewsDict = ["gravityBtn": gravityBtn, "muteBtn": muteBtn, "volumeS": volumeS] as [String: Any]
-        topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-\(spaceH)-[volumeS(80)]-0-[muteBtn(40)]-0-[gravityBtn(40)]-\(spaceH)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
-        topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[gravityBtn(50)]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
-        topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[muteBtn]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
-        topRightView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[volumeS]-0-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict))
+        let viewsDict1 = ["topRightView": topRightView!]
+        let topRightHLC = NSLayoutConstraint.constraints(withVisualFormat: "[topRightView]-20-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict1)
+        addConstraints(topRightHLC)
+        let topRightVLC = NSLayoutConstraint.constraints(withVisualFormat: "V:|-\(bottomSpace)-[topRightView]", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict1)
+        addConstraints(topRightVLC)
     }
     
     func p_control(isHidden bHidden: Bool) {

@@ -16,6 +16,8 @@ class QHPlayerView: UIView {
     
     var timeObserverToken: Any?
     
+    var logBlock: ((String) -> Swift.Void)?
+    
     override class var layerClass: AnyClass {
         get {
             return AVPlayerLayer.self
@@ -45,7 +47,7 @@ class QHPlayerView: UIView {
     // MARK - Private
     
     private func p_setup() {
-        backgroundColor = UIColor.black
+        backgroundColor = UIColor.clear
         p_addPlayControlView()
     }
 }

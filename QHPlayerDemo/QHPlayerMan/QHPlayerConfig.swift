@@ -21,20 +21,17 @@ enum QHPlayerStatus {
 struct QHPlayerPlayConfig {
     var control = false
     // 日志
-    var log = false
+    var log = true
     // 准备好自动播放
     var autoPlay = false
     // 循环播放
-    // 声音
+    // 音量
     var volume: Float = 0.5
     // 缓存
     // 填充模式
     var videoGravity: AVLayerVideoGravity = .resizeAspect
     // 播放进度回调间隔
-    var progress: Float64 = 0
-}
-
-class QHPlayerDefinition: NSObject {
+    var progress: Float64 = 1
 }
 
 extension NSNotification.Name {
@@ -45,4 +42,28 @@ extension NSNotification.Name {
     
     public static let QHPlayerItemBuffer: NSNotification.Name = NSNotification.Name(rawValue: "QHPlayerItemBuffer")
     
+    public static let QHPlayerItemDidPlayToEndTime: NSNotification.Name = NSNotification.Name(rawValue: "AVPlayerItemDidPlayToEndTime")
+    
+    public static let QHPlayerItemFailedToPlayToEndTime: NSNotification.Name = NSNotification.Name(rawValue: "AVPlayerItemFailedToPlayToEndTime")
+    
+}
+
+class QHPlayerDefinition: NSObject {
+    // QHPlayerProgress
+    // - Float64
+    public static let QHPlayerProgressKey = "QHPlayerProgressKey"
+    
+    // QHPlayerItemStatus
+    // - AVPlayerItemStatus
+    public static let QHPlayerItemStatusKey = "QHPlayerItemStatusKey"
+    // - CGFloat
+    public static let QHPlayerItemDurationKey = "QHPlayerItemDurationKey"
+    
+    // QHPlayerItemBuffer
+    // - Bool
+    public static let QHPlayerItemBufferKey = "QHPlayerItemBufferKey"
+    
+    // QHPlayerItemFailedToPlayToEndTime
+    // - String
+    public static let QHPlayerItemFailedToPlayToEndTimeErrorKey = "QHPlayerItemFailedToPlayToEndTimeErrorKey"
 }
