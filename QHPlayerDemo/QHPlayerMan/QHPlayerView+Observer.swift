@@ -70,7 +70,7 @@ extension QHPlayerView {
                         case .failed:
                             print("failes")
                         }
-                        NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemStatus, object: status)
+                        NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemStatus, object: [status])
                     }
                 }
             }

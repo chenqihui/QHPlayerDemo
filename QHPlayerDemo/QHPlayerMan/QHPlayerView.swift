@@ -76,6 +76,7 @@ extension QHPlayerView {
             
             playControlV?.playSumTime = Float(p_currentItemDuration())
             playControlV?.volume = Float(player.volume)
+            playControlV?.bReadyToPlay = false
         }
     }
     

@@ -70,6 +70,8 @@ class QHPlayerControlView: UIView {
         }
     }
     
+    var bReadyToPlay = false
+    
     weak var delegate: QHPlayerControlViewDelegate?
     
     var statusBarOrientation: UIInterfaceOrientation = .unknown
@@ -143,40 +145,6 @@ extension QHPlayerControlView {
     }
 }
 
-// MARK - Notification
-
-extension QHPlayerControlView {
-    
-    private func p_addNotificaion() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.playChangedListener(notif:)), name: NSNotification.Name.QHPlayerProgress, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.deviceOrientationDidChange(notif:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-    }
-    
-    private func p_removeNotificaion() {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.QHPlayerProgress, object: nil)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-    }
-    
-    // MARK - Action
-    
-    @objc func playChangedListener(notif: Notification) {
-        if bTouchSlider == true {
-            return
-        }
-        if let object = notif.object as? [Any] {
-            if let t = object[0] as? CMTime {
-                let playTimeLValue = CMTimeGetSeconds(t)
-                playTimeL.text = p_secondsToString(Int(playTimeLValue))
-                playS.value = Float(playTimeLValue)
-            }
-        }
-    }
-    
-    @objc func deviceOrientationDidChange(notif: Notification) {
-        p_addConstraints()
-    }
-}
-
 // MARK - Util
 
 extension QHPlayerControlView {
@@ -210,66 +178,5 @@ extension QHPlayerControlView {
             }
         }
         return false
-    }
-}
-
-// MARK - Action
-
-extension QHPlayerControlView {
-    
-    @objc func playAction() {
-        delegate?.playerControlTo(self, bPlay: !playBtn.isSelected)
-        playBtn.isSelected = !playBtn.isSelected
-    }
-    
-    @objc func backwardAction() {
-        self.bTouchSlider = true
-        delegate?.playerControlTo(self, toward: -15, completionHandler: { (bFinished) in
-            self.bTouchSlider = false
-        })
-    }
-    
-    @objc func forwardAction() {
-        self.bTouchSlider = true
-        delegate?.playerControlTo(self, toward: 15, completionHandler: { (bFinished) in
-            self.bTouchSlider = false
-        })
-    }
-    
-    @objc func sliderValueChangedAction(slider: UISlider) {
-        playTimeL.text = p_secondsToString(Int(slider.value))
-        bTouchSlider = true
-    }
-    
-    @objc func sliderTouchUpInsideAction(slider: UISlider) {
-        delegate?.playerControlTo(self, seconds: CGFloat(slider.value), completionHandler: { (bFinished) in
-            self.bTouchSlider = false
-        })
-    }
-    
-    @objc func sliderTouchUpOutsideAction(slider: UISlider) {
-        bTouchSlider = false
-    }
-    
-    @objc func gravityAction() {
-        delegate?.playerControlTo(self, bGravity: !gravityBtn.isSelected)
-        gravityBtn.isSelected = !gravityBtn.isSelected
-    }
-    
-    @objc func muteAction() {
-        delegate?.playerControlTo(self, bMute: !muteBtn.isSelected)
-        muteBtn.isSelected = !muteBtn.isSelected
-    }
-    
-    @objc func volumeSliderValueChangedAction(slider: UISlider) {
-        delegate?.playerControlTo(self, volume : slider.value)
-    }
-    
-    @objc func hideControlTimerAction() {
-        p_control(isHidden: true)
-    }
-    
-    @objc func tapAction() {
-        p_hideControlTimer()
     }
 }
