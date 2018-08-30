@@ -209,6 +209,7 @@ extension QHPlayerControlView {
         if statusBarOrientation.isPortrait {
             p_removeConstraints()
             p_portrait()
+            gravityBtn.setTitle("↕️", for: .normal)
             if let vWLV = volumeWLC {
                 vWLV.constant = 0
                 volumeS.isHidden = true
@@ -217,6 +218,7 @@ extension QHPlayerControlView {
         else if statusBarOrientation.isLandscape {
             p_removeConstraints()
             p_landscape()
+            gravityBtn.setTitle("↔️", for: .normal)
             if let vWLV = volumeWLC {
                 vWLV.constant = 80
                 volumeS.isHidden = false
@@ -282,7 +284,7 @@ extension QHPlayerControlView {
         let gravityBtn = UIButton(type: .custom)
         gravityBtn.backgroundColor = UIColor.clear
         gravityBtn.setTitle("↕️", for: .normal)
-        gravityBtn.setTitle("↔️", for: .selected)
+        gravityBtn.setTitle("⏹", for: .selected)
         gravityBtn.titleLabel?.font = UIFont.systemFont(ofSize: QHPlayerControlView.fontSizeBtn)
         gravityBtn.addTarget(self, action: #selector(QHPlayerControlView.gravityAction), for: .touchUpInside)
         p_addFullConstraintsTo(gravityBtn, superView: gravityBtnV)
