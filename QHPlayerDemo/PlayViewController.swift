@@ -102,7 +102,7 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
     @objc func qhHandlePlayerNotify(notif: Notification) {
         if notif.name == NSNotification.Name.QHPlayerProgress {
             if let object = notif.object as? [String: Any] {
-                if let time = object[QHPlayerDefinition.QHPlayerProgressKey] as? Float64 {
+                if let _/*time*/ = object[QHPlayerDefinition.QHPlayerProgressKey] as? Float64 {
                 }
             }
         }
@@ -110,7 +110,7 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
             if let object = notif.object as? [String: Any] {
                 if let status = object[QHPlayerDefinition.QHPlayerItemStatusKey] as? QHPlayerItemStatus {
                     if status == .readyToPlay {
-                        if let duration = object[QHPlayerDefinition.QHPlayerItemDurationKey] as? CGFloat {
+                        if let _/*duration*/ = object[QHPlayerDefinition.QHPlayerItemDurationKey] as? CGFloat {
                         }
                     }
                     else {
