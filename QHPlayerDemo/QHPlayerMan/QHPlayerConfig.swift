@@ -21,15 +21,12 @@ enum QHPlayerStatus {
 }
 
 public struct QHPlayerPlayConfig {
+    // 控制器
     public var control = false
     // 日志
     public var log = true
-    // 准备好自动播放
-    var autoPlay = false
-    // 循环播放
     // 音量
     public var volume: Float = 0.5
-    // 缓存
     // 填充模式
     public var videoGravity: AVLayerVideoGravity = .resizeAspect
     // 播放进度回调间隔
