@@ -46,12 +46,12 @@ extension QHPlayerView {
         }
     }
     
-    func p_addVideoNotificaion() {
+    func p_addVideoNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.playerItemDidPlayToEndTime(notif:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.playerItemFailedToPlayToEndTime(notif:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
     }
     
-    func p_removeVideoNotificaion() {
+    func p_removeVideoNotification() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
     }

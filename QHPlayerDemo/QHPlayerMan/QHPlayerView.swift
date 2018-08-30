@@ -33,7 +33,7 @@ public class QHPlayerView: UIView {
         
         p_removeVideoKVO()
         p_removeVideoTimerObserver()
-        p_removeVideoNotificaion()
+        p_removeVideoNotification()
     }
     
     init(frame: CGRect, initConfig config: QHPlayerPlayConfig) {
@@ -88,7 +88,7 @@ extension QHPlayerView {
             
             p_addVideoKVO()
             p_addVideoTimerObserver()
-            p_addVideoNotificaion()
+            p_addVideoNotification()
             
 //            playControlV?.playSumTime = Float(p_currentItemDuration())
             playControlV?.volume = Float(player.volume)
