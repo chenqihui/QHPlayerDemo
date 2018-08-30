@@ -90,10 +90,12 @@ extension QHPlayerView {
         }
         else if keyPath == "playbackBufferEmpty" {
             p_log("playbackBufferEmpty")
+            activity?.startAnimating()
             NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemBuffer, object: [QHPlayerDefinition.QHPlayerItemBufferKey: true])
         }
         else if keyPath == "playbackLikelyToKeepUp" {
             p_log("playbackLikelyToKeepUp")
+            activity?.stopAnimating()
             NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemBuffer, object: [QHPlayerDefinition.QHPlayerItemBufferKey: false])
         }
     }

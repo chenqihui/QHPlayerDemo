@@ -9,14 +9,16 @@
 import UIKit
 import AVFoundation
 
+typealias QHPlayerLogCallBackBlock = (_ log: String) -> Void
+
 class QHPlayerView: UIView {
     
+    var activity: UIActivityIndicatorView?
     var playControlV: QHPlayerControlView?
     var playConfig: QHPlayerPlayConfig!
     
     var timeObserverToken: Any?
-    
-    var logBlock: ((String) -> Swift.Void)?
+    var logBlock: QHPlayerLogCallBackBlock?
     
     override class var layerClass: AnyClass {
         get {
@@ -49,6 +51,18 @@ class QHPlayerView: UIView {
     private func p_setup() {
         backgroundColor = UIColor.clear
         p_addPlayControlView()
+        p_addActivityIndicatorView()
+    }
+    
+    private func p_addActivityIndicatorView() {
+        if playConfig.load == true {
+            activity = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+            activity!.hidesWhenStopped = true
+            activity!.translatesAutoresizingMaskIntoConstraints = false
+            addConstraint(NSLayoutConstraint(item: activity!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
+            addConstraint(NSLayoutConstraint(item: activity!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+            addSubview(activity!)
+        }
     }
 }
 

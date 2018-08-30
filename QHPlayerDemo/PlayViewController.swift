@@ -40,7 +40,12 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
             var config = QHPlayerPlayConfig()
             config.control = true
             config.progress = 1
+            config.log = false
+            config.load = true
             let playV = QHPlayerView.createAt(superView: contentView, initConfig: config)
+            playV.logBlock = { (log) in
+                print("\(log)")
+            };
             playV.prepare(url: url)
 //            playV.play()
         }

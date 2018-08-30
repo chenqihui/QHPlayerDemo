@@ -35,8 +35,6 @@ extension QHPlayerView {
             print(log)
             #endif
         }
-        if logBlock != nil {
-            logBlock!(log)
-        }
+        logBlock?(log)
     }
 }

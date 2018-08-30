@@ -32,6 +32,8 @@ struct QHPlayerPlayConfig {
     var videoGravity: AVLayerVideoGravity = .resizeAspect
     // 播放进度回调间隔
     var progress: Float64 = 1
+    // 菊花
+    var load = false
 }
 
 extension NSNotification.Name {
