@@ -9,6 +9,8 @@
 import Foundation
 import AVFoundation
 
+public typealias QHPlayerItemStatus = AVPlayerItemStatus
+
 enum QHPlayerStatus {
     case unknown
     case readyToPlay
@@ -18,22 +20,26 @@ enum QHPlayerStatus {
     case fail
 }
 
-struct QHPlayerPlayConfig {
-    var control = false
+public struct QHPlayerPlayConfig {
+    public var control = false
     // 日志
-    var log = true
+    public var log = true
     // 准备好自动播放
     var autoPlay = false
     // 循环播放
     // 音量
-    var volume: Float = 0.5
+    public var volume: Float = 0.5
     // 缓存
     // 填充模式
-    var videoGravity: AVLayerVideoGravity = .resizeAspect
+    public var videoGravity: AVLayerVideoGravity = .resizeAspect
     // 播放进度回调间隔
-    var progress: Float64 = 1
+    public var progress: Float64 = 1
     // 菊花
-    var load = false
+    public var load = false
+    
+    public init() {
+        
+    }
 }
 
 extension NSNotification.Name {
@@ -50,7 +56,7 @@ extension NSNotification.Name {
     
 }
 
-class QHPlayerDefinition: NSObject {
+public class QHPlayerDefinition: NSObject {
     // QHPlayerProgress
     // - Float64
     public static let QHPlayerProgressKey = "QHPlayerProgressKey"

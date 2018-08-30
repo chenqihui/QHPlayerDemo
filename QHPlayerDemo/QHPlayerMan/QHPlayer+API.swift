@@ -11,7 +11,7 @@ import UIKit
 
 extension QHPlayerView {
     
-    class func createAt(superView: UIView, initConfig config: QHPlayerPlayConfig = QHPlayerPlayConfig()) -> QHPlayerView {
+    public class func createAt(superView: UIView, initConfig config: QHPlayerPlayConfig = QHPlayerPlayConfig()) -> QHPlayerView {
         let playV = QHPlayerView(frame: CGRect.zero, initConfig: config)
         superView.addSubview(playV)
         playV.translatesAutoresizingMaskIntoConstraints = false
@@ -21,41 +21,41 @@ extension QHPlayerView {
         return playV
     }
     
-    func prepare(url URL: URL) {
+    public func prepare(url URL: URL) {
         p_prepare(url: URL)
     }
     
-    func play() {
+    public func play() {
         p_play()
     }
     
-    func pause() {
+    public func pause() {
         p_pause()
     }
     
-    func seek(to seconds: Float64, completionHandler: @escaping (Bool) -> Swift.Void) {
+    public func seek(to seconds: Float64, completionHandler: @escaping (Bool) -> Swift.Void) {
         p_seek(to: seconds) { (bFinished) in
             completionHandler(bFinished)
         }
     }
     
-    func seekToward(to seconds: Float64, completionHandler: @escaping (Bool) -> Swift.Void) {
+    public func seekToward(to seconds: Float64, completionHandler: @escaping (Bool) -> Swift.Void) {
         p_seekToward(to: seconds, completionHandler: completionHandler)
     }
     
-    func gravity(is bGravity: Bool) {
+    public func gravity(is bGravity: Bool) {
         p_gravity(is: bGravity)
     }
     
-    func mute(is bMute: Bool) {
+    public func mute(is bMute: Bool) {
         p_mute(is: bMute)
     }
     
-    func volume(to volume: Float) {
+    public func volume(to volume: Float) {
         p_volume(to: volume)
     }
     
-    func currentItemDuration() -> CGFloat {
+    public func currentItemDuration() -> CGFloat {
         return p_currentItemDuration()
     }
 }

@@ -9,18 +9,18 @@
 import UIKit
 import AVFoundation
 
-typealias QHPlayerLogCallBackBlock = (_ log: String) -> Void
+public typealias QHPlayerLogCallBackBlock = (_ log: String) -> Void
 
-class QHPlayerView: UIView {
+public class QHPlayerView: UIView {
     
     var activity: UIActivityIndicatorView?
     var playControlV: QHPlayerControlView?
     var playConfig: QHPlayerPlayConfig!
     
     var timeObserverToken: Any?
-    var logBlock: QHPlayerLogCallBackBlock?
+    public var logBlock: QHPlayerLogCallBackBlock?
     
-    override class var layerClass: AnyClass {
+    override public class var layerClass: AnyClass {
         get {
             return AVPlayerLayer.self
         }
@@ -42,7 +42,7 @@ class QHPlayerView: UIView {
         p_setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
