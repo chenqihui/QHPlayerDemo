@@ -34,6 +34,15 @@ public struct QHPlayerPlayConfig {
     // 菊花
     public var load = false
     
+    // 自动播放
+    var autoPlay = false
+    // 后台播放
+    var background = false
+    // 缓存
+    var cache = false
+    // 循环播放
+    var loop = false
+    
     public init() {
         
     }

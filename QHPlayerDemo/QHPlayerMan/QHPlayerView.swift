@@ -70,7 +70,11 @@ extension QHPlayerView {
     
     func p_prepare(url URL: URL) {
         if let playerLayer = layer as? AVPlayerLayer {
-            let playerItem = AVPlayerItem(url: URL)
+            // 添加协议头：AVURLAssetHTTPHeaderFieldsKey
+            let headerFields: [String: String] = ["User-Agent":"value"]
+            let asset = AVURLAsset(url: URL, options: ["AVURLAssetHTTPHeaderFieldsKey": headerFields])
+            let playerItem = AVPlayerItem(asset: asset)
+//            let playerItem = AVPlayerItem(url: URL)
             if playerLayer.player != nil {
                 playerLayer.player?.pause()
                 playerLayer.player = nil
