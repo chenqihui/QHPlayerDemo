@@ -23,6 +23,7 @@
 		749C60912135494B003AF217 /* QHPlayerView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C60902135494B003AF217 /* QHPlayerView+Util.swift */; };
 		749C609321354CF4003AF217 /* QHPlayer+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C609221354CF4003AF217 /* QHPlayer+API.swift */; };
 		74B4749821363D7100048981 /* QHPlayerControlView+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B4749721363D7100048981 /* QHPlayerControlView+UI.swift */; };
+		74F322BE213924670077DA96 /* PlayAudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F322BD213924660077DA96 /* PlayAudioViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		749C60902135494B003AF217 /* QHPlayerView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayerView+Util.swift"; sourceTree = "<group>"; };
 		749C609221354CF4003AF217 /* QHPlayer+API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayer+API.swift"; sourceTree = "<group>"; };
 		74B4749721363D7100048981 /* QHPlayerControlView+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayerControlView+UI.swift"; sourceTree = "<group>"; };
+		74F322BD213924660077DA96 /* PlayAudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAudioViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				74618933212C01FA00838040 /* AppDelegate.swift */,
 				74618935212C01FA00838040 /* ViewController.swift */,
 				74618956212EA13300838040 /* PlayViewController.swift */,
+				74F322BD213924660077DA96 /* PlayAudioViewController.swift */,
 				74618937212C01FA00838040 /* Main.storyboard */,
 				7461893A212C01FB00838040 /* Assets.xcassets */,
 				7461893C212C01FB00838040 /* LaunchScreen.storyboard */,
@@ -197,6 +200,7 @@
 				7461895B212FA67A00838040 /* QHPlayerControlView.swift in Sources */,
 				7461895D2130122F00838040 /* QHPlayerConfig.swift in Sources */,
 				749C608D2134FF6B003AF217 /* QHPlayerView+Control.swift in Sources */,
+				74F322BE213924670077DA96 /* PlayAudioViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

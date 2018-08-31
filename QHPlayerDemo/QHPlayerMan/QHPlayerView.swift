@@ -97,6 +97,15 @@ extension QHPlayerView {
 //            playControlV?.playSumTime = Float(p_currentItemDuration())
             playControlV?.volume = Float(player.volume)
             playControlV?.bReadyToPlay = false
+            
+            asset.loadValuesAsynchronously(forKeys: ["tracks"]) {
+                for track in asset.tracks {
+                    print("\(track)")
+                    if track.mediaType == .video {
+                        print("\(track.naturalSize)")
+                    }
+                }
+            }
         }
     }
     

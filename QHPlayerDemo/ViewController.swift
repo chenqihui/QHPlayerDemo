@@ -25,5 +25,9 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func audioAction(_ sender: Any) {
+        let vc = PlayAudioViewController.create()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
