@@ -30,11 +30,9 @@ extension QHPlayerView {
             p_removeVideoTimerObserver()
             if let player = p_player() {
                 let interval = CMTimeMakeWithSeconds(playConfig.progress, Int32(NSEC_PER_SEC));
-                timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: nil) { [weak self] (time) in
-                    if self != nil {
-                        let playTimeLValue = CMTimeGetSeconds(time)
-                        NotificationCenter.default.post(name: NSNotification.Name.QHPlayerProgress, object: [QHPlayerDefinition.QHPlayerProgressKey: playTimeLValue])
-                    }
+                timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: nil) { (time) in
+                    let playTimeLValue = CMTimeGetSeconds(time)
+                    NotificationCenter.default.post(name: NSNotification.Name.QHPlayerProgress, object: [QHPlayerDefinition.QHPlayerProgressKey: playTimeLValue])
                 }
             }
         }
@@ -43,6 +41,7 @@ extension QHPlayerView {
     func p_removeVideoTimerObserver() {
         if let timeOT = timeObserverToken {
             p_player()?.removeTimeObserver(timeOT)
+            timeObserverToken = nil
         }
     }
     

@@ -52,6 +52,7 @@ public class QHPlayerView: UIView {
         backgroundColor = UIColor.clear
         p_addPlayControlView()
         p_addActivityIndicatorView()
+        p_addVideoNotification()
     }
     
     private func p_addActivityIndicatorView() {
@@ -79,20 +80,16 @@ extension QHPlayerView {
                 playerLayer.player?.pause()
                 playerLayer.player = nil
             }
-            let player = AVPlayer(playerItem: playerItem)
             if #available(iOS 10.0, *) {
                 player.automaticallyWaitsToMinimizeStalling = false
             } else {
                 // Fallback on earlier versions
             }
-            playerLayer.player = player
             
             playerLayer.videoGravity = playConfig.videoGravity
             player.volume = playConfig.volume
             
             p_addVideoKVO()
-            p_addVideoTimerObserver()
-            p_addVideoNotification()
             
 //            playControlV?.playSumTime = Float(p_currentItemDuration())
             playControlV?.volume = Float(player.volume)

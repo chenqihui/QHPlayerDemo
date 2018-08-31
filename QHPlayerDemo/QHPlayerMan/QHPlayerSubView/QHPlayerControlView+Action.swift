@@ -34,8 +34,10 @@ extension QHPlayerControlView {
             return
         }
         self.bTouchSlider = true
-        delegate?.playerControlTo(self, toward: 15, completionHandler: { (bFinished) in
-            self.bTouchSlider = false
+        delegate?.playerControlTo(self, toward: 15, completionHandler: { [weak self] (bFinished) in
+            if self != nil {
+                self?.bTouchSlider = false
+            }
         })
     }
     
