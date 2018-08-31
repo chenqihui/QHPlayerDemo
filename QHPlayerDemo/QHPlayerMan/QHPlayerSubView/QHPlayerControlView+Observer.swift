@@ -41,6 +41,9 @@ extension QHPlayerControlView {
     
     @objc func qhHandlePlayerNotify(notif: Notification) {
         if notif.name == NSNotification.Name.QHPlayerProgress {
+            if bTouchSlider == true {
+                return
+            }
             if let object = notif.object as? [String: Any] {
                 if let time = object[QHPlayerDefinition.QHPlayerProgressKey] as? Float64 {
                     playTimeL.text = p_secondsToString(Int(time))

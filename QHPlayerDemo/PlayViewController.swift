@@ -11,6 +11,10 @@ import UIKit
 class PlayViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var contentView: UIView!
+    var playerView: QHPlayerView!
+    
+    static let url = "http://10.7.66.56/resource/4AC51038CA4411EED492019D6EA79A50.mp4"
+    // "http://192.168.2.17/resource/4AC51038CA4411EED492019D6EA79A50.mp4"
     
     deinit {
         #if DEBUG
@@ -18,17 +22,17 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
         #endif
         p_removeNotificaion()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         navigationController?.delegate = self
         
         p_addPlayerView()
         p_addNotificaion()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -37,8 +41,8 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
     // MARK - Private
     
     private func p_addPlayerView() {
-        if let url = URL(string: "http://10.7.66.56/resource/4AC51038CA4411EED492019D6EA79A50.mp4") {
-//        if let url = URL(string: "http://192.168.2.17/resource/4AC51038CA4411EED492019D6EA79A50.mp4") {
+        if let url = URL(string: PlayViewController.url) {
+            //        if let url = URL(string: ) {
             var config = QHPlayerPlayConfig()
             config.control = true
             config.progress = 1
@@ -48,8 +52,9 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
             playV.logBlock = { (log) in
                 print("\(log)")
             };
+            playerView = playV
             playV.prepare(url: url)
-//            playV.play()
+            //            playV.play()
         }
     }
     
@@ -121,6 +126,10 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
         else if notif.name == NSNotification.Name.QHPlayerItemBuffer {
         }
         else if notif.name == NSNotification.Name.QHPlayerItemDidPlayToEndTime {
+            if let url = URL(string: PlayViewController.url) {
+                playerView.prepare(url: url)
+                playerView.play()
+            }
         }
         else if notif.name == NSNotification.Name.QHPlayerItemFailedToPlayToEndTime {
         }
