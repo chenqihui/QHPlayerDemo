@@ -71,14 +71,25 @@ extension QHPlayerView {
     
     func p_prepare(url URL: URL) {
         if let playerLayer = layer as? AVPlayerLayer {
+            
             // 添加协议头：AVURLAssetHTTPHeaderFieldsKey
             let headerFields: [String: String] = ["User-Agent":"value"]
             let asset = AVURLAsset(url: URL, options: ["AVURLAssetHTTPHeaderFieldsKey": headerFields])
             let playerItem = AVPlayerItem(asset: asset)
 //            let playerItem = AVPlayerItem(url: URL)
-            if playerLayer.player != nil {
-                playerLayer.player?.pause()
-                playerLayer.player = nil
+            
+            var player: AVPlayer
+            if let playerTemp = playerLayer.player {
+                p_removeVideoKVO()
+                
+                player = playerTemp
+                player.pause()
+                player.replaceCurrentItem(with: playerItem)
+            }
+            else {
+                player = AVPlayer(playerItem: playerItem)
+                playerLayer.player = player
+                p_addVideoTimerObserver()
             }
             if #available(iOS 10.0, *) {
                 player.automaticallyWaitsToMinimizeStalling = false
@@ -95,6 +106,7 @@ extension QHPlayerView {
             playControlV?.volume = Float(player.volume)
             playControlV?.bReadyToPlay = false
             
+            // 异步获取视频的 size
             asset.loadValuesAsynchronously(forKeys: ["tracks"]) {
                 for track in asset.tracks {
                     print("\(track)")
