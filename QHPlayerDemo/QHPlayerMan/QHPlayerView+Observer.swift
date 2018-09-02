@@ -13,14 +13,14 @@ extension QHPlayerView {
     
     func p_addVideoKVO() {
         p_player()?.currentItem?.addObserver(self, forKeyPath: "status", options: .new, context: nil)
-        p_player()?.currentItem?.addObserver(self, forKeyPath: "loadedTimeRanges", options: .new, context: nil)
+//        p_player()?.currentItem?.addObserver(self, forKeyPath: "loadedTimeRanges", options: .new, context: nil)
         p_player()?.currentItem?.addObserver(self, forKeyPath: "playbackBufferEmpty", options: .new, context: nil)
         p_player()?.currentItem?.addObserver(self, forKeyPath: "playbackLikelyToKeepUp", options: .new, context: nil)
     }
     
     func p_removeVideoKVO() {
         p_player()?.currentItem?.removeObserver(self, forKeyPath: "status")
-        p_player()?.currentItem?.removeObserver(self, forKeyPath: "loadedTimeRanges")
+//        p_player()?.currentItem?.removeObserver(self, forKeyPath: "loadedTimeRanges")
         p_player()?.currentItem?.removeObserver(self, forKeyPath: "playbackBufferEmpty")
         p_player()?.currentItem?.removeObserver(self, forKeyPath: "playbackLikelyToKeepUp")
     }
@@ -62,6 +62,12 @@ extension QHPlayerView {
             if let c = change {
                 if let statusValue = c[.newKey] as? Int {
                     if let status = AVPlayerItemStatus(rawValue: statusValue) {
+                        if playConfig.readyToPlay == true {
+                            if playerItemStatu == .readyToPlay {
+                                return
+                            }
+                        }
+                        playerItemStatu = status
                         var obj = [String: Any]()
                         obj[QHPlayerDefinition.QHPlayerItemStatusKey] = status
                         switch status {

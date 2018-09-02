@@ -16,6 +16,7 @@ public class QHPlayerView: UIView {
     var activity: UIActivityIndicatorView?
     var playControlV: QHPlayerControlView?
     var playConfig: QHPlayerPlayConfig!
+    var playerItemStatu: QHPlayerItemStatus = .unknown
     
     var timeObserverToken: Any?
     public var logBlock: QHPlayerLogCallBackBlock?
@@ -83,7 +84,7 @@ extension QHPlayerView {
                 p_removeVideoKVO()
                 
                 player = playerTemp
-                player.pause()
+                p_pause()
                 player.replaceCurrentItem(with: playerItem)
             }
             else {
