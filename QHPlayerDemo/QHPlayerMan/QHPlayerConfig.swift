@@ -12,19 +12,16 @@ import AVFoundation
 public typealias QHPlayerItemStatus = AVPlayerItemStatus
 
 enum QHPlayerStatus {
-    case unknown
-    case readyToPlay
     case play
     case pause
     case stop
-    case fail
 }
 
 public struct QHPlayerPlayConfig {
     // 控制器
     public var control = false
-    // 日志
-    public var log = true
+    // 内部日志
+    public var log = false
     // 音量
     public var volume: Float = 0.5
     // 填充模式
@@ -33,6 +30,9 @@ public struct QHPlayerPlayConfig {
     public var progress: Float64 = 1
     // 菊花
     public var load = false
+    // 过滤 .readyToPlay
+    // 用于控制 playItemStatus 在 App 回前台时候再次通知 readyToPlay 时候的过滤。其实也可以回前台时做标记，通过这个通知再进行播放控制，这里可以根据需求来确定。
+    public var readyToPlay = false
     
     public init() {
         

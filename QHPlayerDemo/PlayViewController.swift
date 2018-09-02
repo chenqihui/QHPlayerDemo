@@ -13,8 +13,8 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var contentView: UIView!
     var playerView: QHPlayerView!
     
-    static let url = "http://10.7.66.56/resource/4AC51038CA4411EED492019D6EA79A50.mp4"
-    // "http://192.168.2.17/resource/4AC51038CA4411EED492019D6EA79A50.mp4"
+//    static let url = "http://10.7.66.56/resource/4AC51038CA4411EED492019D6EA79A50.mp4"
+    static let url = "http://192.168.2.17/resource/4AC51038CA4411EED492019D6EA79A50.mp4"
     
     deinit {
         #if DEBUG
@@ -42,7 +42,6 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
     
     private func p_addPlayerView() {
         if let url = URL(string: PlayViewController.url) {
-            //        if let url = URL(string: ) {
             var config = QHPlayerPlayConfig()
             config.control = true
             config.progress = 1
@@ -59,6 +58,8 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     private func p_addNotificaion() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationEnterNotify(notif:)), name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationEnterNotify(notif:)), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.qhHandlePlayerNotify(notif:)), name: NSNotification.Name.QHPlayerProgress, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.qhHandlePlayerNotify(notif:)), name: NSNotification.Name.QHPlayerItemStatus, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.qhHandlePlayerNotify(notif:)), name: NSNotification.Name.QHPlayerItemBuffer, object: nil)
@@ -67,6 +68,8 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
     }
     
     private func p_removeNotificaion() {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidEnterBackground, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.QHPlayerProgress, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.QHPlayerItemStatus, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.QHPlayerItemBuffer, object: nil)
@@ -102,6 +105,15 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBAction func backAction(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func applicationEnterNotify(notif: Notification) {
+        if notif.name == NSNotification.Name.UIApplicationDidEnterBackground {
+//            playerView.pause()
+        }
+        else if notif.name == NSNotification.Name.UIApplicationWillEnterForeground {
+//            playerView.play()
+        }
     }
     
     @objc func qhHandlePlayerNotify(notif: Notification) {

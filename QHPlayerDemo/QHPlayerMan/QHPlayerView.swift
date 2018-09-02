@@ -16,6 +16,7 @@ public class QHPlayerView: UIView {
     var activity: UIActivityIndicatorView?
     var playControlV: QHPlayerControlView?
     var playConfig: QHPlayerPlayConfig!
+    var playerItemStatu: QHPlayerItemStatus = .unknown
     
     var timeObserverToken: Any?
     public var logBlock: QHPlayerLogCallBackBlock?
@@ -71,13 +72,14 @@ extension QHPlayerView {
     
     func p_prepare(url URL: URL) {
         if let playerLayer = layer as? AVPlayerLayer {
+            playerItemStatu = .unknown
             let playerItem = AVPlayerItem(url: URL)
             var player: AVPlayer
             if let playerTemp = playerLayer.player {
                 p_removeVideoKVO()
                 
                 player = playerTemp
-                player.pause()
+                p_pause()
                 player.replaceCurrentItem(with: playerItem)
             }
             else {
