@@ -72,6 +72,7 @@ extension QHPlayerView {
     
     func p_prepare(url URL: URL) {
         if let playerLayer = layer as? AVPlayerLayer {
+            playerItemStatu = .unknown
             
             // 添加协议头：AVURLAssetHTTPHeaderFieldsKey
             let headerFields: [String: String] = ["User-Agent":"value"]
