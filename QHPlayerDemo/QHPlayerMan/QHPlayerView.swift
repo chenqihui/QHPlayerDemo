@@ -20,6 +20,7 @@ public class QHPlayerView: UIView {
     
     var timeObserverToken: Any?
     public var logBlock: QHPlayerLogCallBackBlock?
+    private(set) var playerStatus = QHPlayerStatus.ready
     
     override public class var layerClass: AnyClass {
         get {
@@ -54,16 +55,27 @@ public class QHPlayerView: UIView {
         p_addPlayControlView()
         p_addActivityIndicatorView()
         p_addVideoNotification()
+        
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(AVAudioSessionCategoryPlayback)
+            try session.setActive(true)
+        }
+        catch {
+            print(error)
+        }
+        
+        
     }
     
     private func p_addActivityIndicatorView() {
         if playConfig.load == true {
             activity = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
             activity!.hidesWhenStopped = true
+            addSubview(activity!)
             activity!.translatesAutoresizingMaskIntoConstraints = false
             addConstraint(NSLayoutConstraint(item: activity!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
             addConstraint(NSLayoutConstraint(item: activity!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-            addSubview(activity!)
         }
     }
 }
@@ -80,9 +92,11 @@ extension QHPlayerView {
                 
                 player = playerTemp
                 p_pause()
+                playerStatus = .ready
                 player.replaceCurrentItem(with: playerItem)
             }
             else {
+                playerStatus = .ready
                 player = AVPlayer(playerItem: playerItem)
                 playerLayer.player = player
                 p_addVideoTimerObserver()
@@ -106,12 +120,14 @@ extension QHPlayerView {
     
     func p_play() {
         if let player = p_player() {
+            playerStatus = .play
             player.play()
         }
     }
     
     func p_pause() {
         if let player = p_player() {
+            playerStatus = .pause
             player.pause()
         }
     }

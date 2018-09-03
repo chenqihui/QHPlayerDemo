@@ -165,7 +165,7 @@ extension QHPlayerControlView {
         bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[playSliderView(25)]", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict2))
         
         let viewsDict3 = ["playTimeView": playTimeView!]
-        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-\(spaceH)-[playTimeView(60)]|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict3))
+        bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-\(spaceH)-[playTimeView(==60)]-(>=0)-|", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict3))
         bottomView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-30-[playTimeView(15)]", options: NSLayoutFormatOptions.alignAllLastBaseline, metrics: nil, views: viewsDict3))
         
         let viewsDict4 = ["playSumTimeView": playSumTimeView!]
