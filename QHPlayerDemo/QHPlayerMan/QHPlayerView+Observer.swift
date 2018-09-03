@@ -48,11 +48,15 @@ extension QHPlayerView {
     func p_addVideoNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.playerItemDidPlayToEndTime(notif:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.playerItemFailedToPlayToEndTime(notif:)), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleRouteChange(notif:)), name: Notification.Name.AVAudioSessionRouteChange, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(audioInterruption(notif:)), name: Notification.Name.AVAudioSessionInterruption, object: nil)
     }
     
     func p_removeVideoNotification() {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name.AVAudioSessionRouteChange, object: nil)
+//        NotificationCenter.default.removeObserver(self, name: Notification.Name.AVAudioSessionInterruption, object: nil)
     }
     
     // MARK - Action
@@ -119,5 +123,41 @@ extension QHPlayerView {
             }
         }
         NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemFailedToPlayToEndTime, object: [QHPlayerDefinition.QHPlayerItemFailedToPlayToEndTimeErrorKey: error])
+    }
+    
+    @objc func handleRouteChange(notif: Notification) {
+        if let info = notif.userInfo {
+            if let reason = info[AVAudioSessionRouteChangeReasonKey] as? UInt {
+                if reason == AVAudioSessionRouteChangeReason.oldDeviceUnavailable.rawValue {
+                    if let previousRoute = info[AVAudioSessionRouteChangePreviousRouteKey] as? AVAudioSessionRouteDescription {
+                        let previousOutput = previousRoute.outputs[0]
+                        let portType = previousOutput.portType
+                        if portType == AVAudioSessionPortHeadphones {
+                            p_log("拨出耳机 AVAudioSessionPortHeadphones")
+                            if playerStatus == .play {
+                                p_play()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    @objc func audioInterruption(notif: Notification) {
+        if let info = notif.userInfo {
+            if let type = info[AVAudioSessionInterruptionTypeKey] as? UInt {
+                if type == AVAudioSessionInterruptionType.began.rawValue {
+                    
+                }
+                else {
+                    if let options = info[AVAudioSessionInterruptionOptionKey] as? UInt {
+                        if options == AVAudioSessionInterruptionFlags_ShouldResume {
+                            
+                        }
+                    }
+                }
+            }
+        }
     }
 }
