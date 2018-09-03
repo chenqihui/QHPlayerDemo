@@ -15,6 +15,7 @@ public enum QHPlayerStatus {
     case ready
     case play
     case pause
+    case fails
 }
 
 public struct QHPlayerPlayConfig {

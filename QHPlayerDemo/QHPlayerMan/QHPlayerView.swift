@@ -20,7 +20,7 @@ public class QHPlayerView: UIView {
     
     var timeObserverToken: Any?
     public var logBlock: QHPlayerLogCallBackBlock?
-    private(set) var playerStatus = QHPlayerStatus.ready
+    var playerStatus = QHPlayerStatus.ready
     
     override public class var layerClass: AnyClass {
         get {

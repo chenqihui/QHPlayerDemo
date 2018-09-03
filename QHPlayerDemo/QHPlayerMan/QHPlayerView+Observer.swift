@@ -111,6 +111,7 @@ extension QHPlayerView {
     
     @objc func playerItemDidPlayToEndTime(notif: Notification) {
         p_log("playerItemDidPlayToEndTime")
+        playerStatus = .ready
         NotificationCenter.default.post(name: NSNotification.Name.QHPlayerItemDidPlayToEndTime, object: nil)
     }
     
