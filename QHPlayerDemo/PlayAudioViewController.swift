@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import AVFoundation
+import MediaPlayer
 
 class PlayAudioViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var contentView: UIView!
+    
+//    static let url = "http://10.7.66.56/resource/Beyond.mp3"
+    static let url = "http://192.168.2.17/resource/Beyond.mp3"
     
     deinit {
         #if DEBUG
@@ -29,7 +34,16 @@ class PlayAudioViewController: UIViewController, UINavigationControllerDelegate 
     // MARK - Private
     
     private func p_addPlayerView() {
-        if let url = URL(string: "http://10.7.66.56/resource/Beyond.mp3") {
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(AVAudioSessionCategoryPlayback)
+            try session.setActive(true)
+        }
+        catch {
+            print(error)
+        }
+        
+        if let url = URL(string: PlayAudioViewController.url) {
             var config = QHPlayerPlayConfig()
             config.control = true
             config.progress = 1
@@ -41,6 +55,42 @@ class PlayAudioViewController: UIViewController, UINavigationControllerDelegate 
             };
             playV.prepare(url: url)
             playV.play()
+            
+            
+            let artwork = MPMediaItemArtwork(image: QHPlayerControlView.createImageWithColor(UIColor.orange, size: CGSize(width: 100, height: 100))!)
+                let infoCenter = MPNowPlayingInfoCenter.default()
+            infoCenter.playbackState = .playing
+            infoCenter.nowPlayingInfo = [
+                                        MPMediaItemPropertyTitle: "真的喜欢你",
+                                        MPMediaItemPropertyArtist: "Beyond",
+                                        MPNowPlayingInfoPropertyElapsedPlaybackTime: 0,
+                                        MPMediaItemPropertyPlaybackDuration: playV.currentItemDuration(),
+                                        MPMediaItemPropertyArtwork: artwork,
+                                        MPNowPlayingInfoPropertyPlaybackRate: 1
+                                        ]
+            
+            UIApplication.shared.beginReceivingRemoteControlEvents()
+            // 启用播放命令 (锁屏界面和上拉快捷功能菜单处的播放按钮触发的命令)，默认 true
+            MPRemoteCommandCenter.shared().playCommand.isEnabled = true
+            MPRemoteCommandCenter.shared().playCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in
+                playV.play()
+                return .success
+            }
+            MPRemoteCommandCenter.shared().pauseCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in
+                playV.pause()
+                return .success
+            }
+            // 启用耳机的播放/暂停命令 (耳机上的播放按钮触发的命令)
+            MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in
+                // 需自己判断 play or pause
+                return .success
+            }
+            MPRemoteCommandCenter.shared().previousTrackCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in
+                return .success
+            }
+            MPRemoteCommandCenter.shared().nextTrackCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in
+                return .success
+            }
         }
     }
     
