@@ -11,10 +11,11 @@ import AVFoundation
 
 public typealias QHPlayerItemStatus = AVPlayerItemStatus
 
-enum QHPlayerStatus {
+public enum QHPlayerStatus {
+    case ready
     case play
     case pause
-    case stop
+    case fails
 }
 
 public struct QHPlayerPlayConfig {
