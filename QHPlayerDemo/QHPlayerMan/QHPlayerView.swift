@@ -52,20 +52,10 @@ public class QHPlayerView: UIView {
     
     private func p_setup() {
         backgroundColor = UIColor.clear
+        p_AudioSessionActive()
         p_addPlayControlView()
         p_addActivityIndicatorView()
         p_addVideoNotification()
-        
-        do {
-            let session = AVAudioSession.sharedInstance()
-            try session.setCategory(AVAudioSessionCategoryPlayback)
-            try session.setActive(true)
-        }
-        catch {
-            print(error)
-        }
-        
-        
     }
     
     private func p_addActivityIndicatorView() {
@@ -81,6 +71,17 @@ public class QHPlayerView: UIView {
 }
 
 extension QHPlayerView {
+    
+    private func p_AudioSessionActive() {
+        do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(AVAudioSessionCategoryPlayback)
+            try session.setActive(true)
+        }
+        catch {
+            print(error)
+        }
+    }
     
     func p_prepare(url URL: URL) {
         if let playerLayer = layer as? AVPlayerLayer {
