@@ -339,7 +339,6 @@
 		74618943212C01FB00838040 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JC9Y4K55DX;
 				INFOPLIST_FILE = QHPlayerDemo/Info.plist;
@@ -358,7 +357,6 @@
 		74618944212C01FB00838040 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JC9Y4K55DX;
 				INFOPLIST_FILE = QHPlayerDemo/Info.plist;
