@@ -13,9 +13,10 @@ import MediaPlayer
 class PlayAudioViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var progressView: UIProgressView!
     
-//    static let url = "http://10.7.66.56/resource/Beyond.mp3"
-    static let url = "http://192.168.2.17/resource/Beyond.mp3"
+    static let url = "http://10.7.66.56/resource/Beyond.mp3"
+//    static let url = "http://192.168.2.17/resource/Beyond.mp3"
     
     deinit {
         #if DEBUG
@@ -86,6 +87,26 @@ class PlayAudioViewController: UIViewController, UINavigationControllerDelegate 
             }
             MPRemoteCommandCenter.shared().nextTrackCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in
                 return .success
+            }
+            
+            if let player = playV.p_player() {
+                player.isMeteringEnabled = true
+                player.averagePowerListInLinearForm { (iAvgPowerList, iSuccess) in
+                    if let list = iAvgPowerList {
+                        if list.count > 0 {
+                            if var power = list[0] as? Double {
+                                if list.count > 1 {
+                                    if let secondPower = list[1] as? Double {
+                                        power = (power + secondPower) / 2
+                                    }
+                                }
+                                DispatchQueue.main.async {
+                                    self.progressView.progress = Float(power)
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

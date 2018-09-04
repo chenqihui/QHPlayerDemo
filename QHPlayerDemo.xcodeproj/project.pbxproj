@@ -22,6 +22,9 @@
 		749C608F213548F5003AF217 /* QHPlayerView+Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C608E213548F5003AF217 /* QHPlayerView+Observer.swift */; };
 		749C60912135494B003AF217 /* QHPlayerView+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C60902135494B003AF217 /* QHPlayerView+Util.swift */; };
 		749C609321354CF4003AF217 /* QHPlayer+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749C609221354CF4003AF217 /* QHPlayer+API.swift */; };
+		74A82C38213E3AF300505D28 /* ACBAudioProcessHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A82C34213E3AF300505D28 /* ACBAudioProcessHelper.m */; };
+		74A82C39213E3AF300505D28 /* AVPlayer+ACBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A82C35213E3AF300505D28 /* AVPlayer+ACBHelper.m */; };
+		74A82C3A213E3AF300505D28 /* MYAudioTapProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A82C37213E3AF300505D28 /* MYAudioTapProcessor.m */; };
 		74B4749821363D7100048981 /* QHPlayerControlView+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B4749721363D7100048981 /* QHPlayerControlView+UI.swift */; };
 		74F322BE213924670077DA96 /* PlayAudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F322BD213924660077DA96 /* PlayAudioViewController.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +47,13 @@
 		749C608E213548F5003AF217 /* QHPlayerView+Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayerView+Observer.swift"; sourceTree = "<group>"; };
 		749C60902135494B003AF217 /* QHPlayerView+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayerView+Util.swift"; sourceTree = "<group>"; };
 		749C609221354CF4003AF217 /* QHPlayer+API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayer+API.swift"; sourceTree = "<group>"; };
+		74A82C32213E3AF300505D28 /* AVPlayer+ACBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AVPlayer+ACBHelper.h"; sourceTree = "<group>"; };
+		74A82C33213E3AF300505D28 /* MYAudioTapProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYAudioTapProcessor.h; sourceTree = "<group>"; };
+		74A82C34213E3AF300505D28 /* ACBAudioProcessHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACBAudioProcessHelper.m; sourceTree = "<group>"; };
+		74A82C35213E3AF300505D28 /* AVPlayer+ACBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AVPlayer+ACBHelper.m"; sourceTree = "<group>"; };
+		74A82C36213E3AF300505D28 /* ACBAudioProcessHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACBAudioProcessHelper.h; sourceTree = "<group>"; };
+		74A82C37213E3AF300505D28 /* MYAudioTapProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYAudioTapProcessor.m; sourceTree = "<group>"; };
+		74A82C3B213E3C0C00505D28 /* QHPlayer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QHPlayer-Bridging-Header.h"; sourceTree = "<group>"; };
 		74B4749721363D7100048981 /* QHPlayerControlView+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QHPlayerControlView+UI.swift"; sourceTree = "<group>"; };
 		74F322BD213924660077DA96 /* PlayAudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAudioViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,6 +88,7 @@
 		74618932212C01FA00838040 /* QHPlayerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				74A82C31213E3AF300505D28 /* AudioProcessing */,
 				74618945212C025500838040 /* QHPlayerMan */,
 				74618933212C01FA00838040 /* AppDelegate.swift */,
 				74618935212C01FA00838040 /* ViewController.swift */,
@@ -87,6 +98,7 @@
 				7461893A212C01FB00838040 /* Assets.xcassets */,
 				7461893C212C01FB00838040 /* LaunchScreen.storyboard */,
 				7461893F212C01FB00838040 /* Info.plist */,
+				74A82C3B213E3C0C00505D28 /* QHPlayer-Bridging-Header.h */,
 			);
 			path = QHPlayerDemo;
 			sourceTree = "<group>";
@@ -114,6 +126,19 @@
 				749C608C2134FF6B003AF217 /* QHPlayerView+Control.swift */,
 			);
 			path = QHPlayerSubView;
+			sourceTree = "<group>";
+		};
+		74A82C31213E3AF300505D28 /* AudioProcessing */ = {
+			isa = PBXGroup;
+			children = (
+				74A82C32213E3AF300505D28 /* AVPlayer+ACBHelper.h */,
+				74A82C35213E3AF300505D28 /* AVPlayer+ACBHelper.m */,
+				74A82C33213E3AF300505D28 /* MYAudioTapProcessor.h */,
+				74A82C37213E3AF300505D28 /* MYAudioTapProcessor.m */,
+				74A82C36213E3AF300505D28 /* ACBAudioProcessHelper.h */,
+				74A82C34213E3AF300505D28 /* ACBAudioProcessHelper.m */,
+			);
+			path = AudioProcessing;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,10 +216,13 @@
 				749C60912135494B003AF217 /* QHPlayerView+Util.swift in Sources */,
 				749938C42136959400C4AA8E /* QHPlayerControlView+Observer.swift in Sources */,
 				74618957212EA13300838040 /* PlayViewController.swift in Sources */,
+				74A82C39213E3AF300505D28 /* AVPlayer+ACBHelper.m in Sources */,
 				749938C62136970B00C4AA8E /* QHPlayerControlView+Action.swift in Sources */,
 				749C608F213548F5003AF217 /* QHPlayerView+Observer.swift in Sources */,
 				74618959212ED38200838040 /* QHPlayerView.swift in Sources */,
+				74A82C38213E3AF300505D28 /* ACBAudioProcessHelper.m in Sources */,
 				74618934212C01FA00838040 /* AppDelegate.swift in Sources */,
+				74A82C3A213E3AF300505D28 /* MYAudioTapProcessor.m in Sources */,
 				74B4749821363D7100048981 /* QHPlayerControlView+UI.swift in Sources */,
 				749C609321354CF4003AF217 /* QHPlayer+API.swift in Sources */,
 				7461895B212FA67A00838040 /* QHPlayerControlView.swift in Sources */,
@@ -354,6 +382,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chen.QHPlayerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "QHPlayerDemo/QHPlayer-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -373,6 +402,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chen.QHPlayerDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "QHPlayerDemo/QHPlayer-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
