@@ -34,15 +34,6 @@ class PlayAudioViewController: UIViewController, UINavigationControllerDelegate 
     // MARK - Private
     
     private func p_addPlayerView() {
-        do {
-            let session = AVAudioSession.sharedInstance()
-            try session.setCategory(AVAudioSessionCategoryPlayback)
-            try session.setActive(true)
-        }
-        catch {
-            print(error)
-        }
-        
         if let url = URL(string: PlayAudioViewController.url) {
             var config = QHPlayerPlayConfig()
             config.control = true
@@ -54,8 +45,7 @@ class PlayAudioViewController: UIViewController, UINavigationControllerDelegate 
                 print("\(log)")
             };
             playV.prepare(url: url)
-            playV.play()
-            
+//            playV.play()
             
             let artwork = MPMediaItemArtwork(image: QHPlayerControlView.createImageWithColor(UIColor.orange, size: CGSize(width: 100, height: 100))!)
                 let infoCenter = MPNowPlayingInfoCenter.default()
@@ -83,6 +73,12 @@ class PlayAudioViewController: UIViewController, UINavigationControllerDelegate 
             // 启用耳机的播放/暂停命令 (耳机上的播放按钮触发的命令)
             MPRemoteCommandCenter.shared().togglePlayPauseCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in
                 // 需自己判断 play or pause
+                if playV.playerStatus == .play {
+                    playV.pause()
+                }
+                else if playV.playerStatus == .pause {
+                    playV.play()
+                }
                 return .success
             }
             MPRemoteCommandCenter.shared().previousTrackCommand.addTarget { (event) -> MPRemoteCommandHandlerStatus in

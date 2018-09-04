@@ -132,6 +132,9 @@ extension QHPlayerView {
                     }
                 }
             }
+            
+            let a = AVAudioPlayer()
+            a.updateMeters()
         }
     }
     
