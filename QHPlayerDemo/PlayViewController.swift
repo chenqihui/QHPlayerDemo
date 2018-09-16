@@ -13,8 +13,10 @@ class PlayViewController: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var contentView: UIView!
     var playerView: QHPlayerView!
     
-    static let url = "http://10.7.66.56/resource/4AC51038CA4411EED492019D6EA79A50.mp4"
+//    static let url = "http://10.7.66.56/resource/4AC51038CA4411EED492019D6EA79A50.mp4"
 //    static let url = "http://192.168.2.17/resource/4AC51038CA4411EED492019D6EA79A50.mp4"
+    static let url = "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8"
+//    static let url = "http://xxx.m3u8"
     
     deinit {
         #if DEBUG

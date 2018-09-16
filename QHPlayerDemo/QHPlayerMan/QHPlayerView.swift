@@ -103,7 +103,14 @@ extension QHPlayerView {
                 p_addVideoTimerObserver()
             }
             if #available(iOS 10.0, *) {
-                player.automaticallyWaitsToMinimizeStalling = false
+                let pathExtension = URL.pathExtension
+                // 针对 HLS Live Stream 的 m3u8 设置，暂不区分是否是点播还是直播
+                if pathExtension.lowercased() == "m3u8" {
+                    player.automaticallyWaitsToMinimizeStalling = true
+                }
+                else {
+                    player.automaticallyWaitsToMinimizeStalling = false
+                }
             } else {
                 // Fallback on earlier versions
             }
