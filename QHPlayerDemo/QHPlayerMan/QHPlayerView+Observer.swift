@@ -153,9 +153,9 @@ extension QHPlayerView {
                 }
                 else {
                     if let options = info[AVAudioSessionInterruptionOptionKey] as? UInt {
-                        if options == AVAudioSessionInterruptionFlags_ShouldResume {
-                            
-                        }
+//                        if options == AVAudioSessionInterruptionFlags_ShouldResume {
+//
+//                        }
                     }
                 }
             }
